@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="hiroakarogo.png" type="image/png">
+    <title>僕のヒーローアカデミア</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow-x: hidden;
+            background-color: #565656; /* ページ全体の背景色を指定 */
+        }
+
+        .responsive-img {
+            max-width: 100%;
+            height: auto;
+        }
+    
+        .content-container {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+    
+        .youtube-container, .twitter-container {
+            width: 560px;
+            height: 315px;
+            margin: 20px auto;
+        }
+    
+        .youtube-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    
+        .twitter-container .twitter-timeline {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <title>youtubeとTwitterのコンテンツ</title>
+    <style>
+        /* 既存のスタイル */
+        @font-face {
+            font-family: 'KeiFont';
+            src: url('keifont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    
+        .container {
+            display: flex;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .menu-left, .menu-right {
+            width: 200px;
+            background-color: #7e7e7e;
+            padding: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: 'KeiFont', sans-serif;
+            margin: 0;
+        }
+    
+        .menu-left h2, .menu-right h2,
+        .menu-left a, .menu-right a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+    
+        .menu-left ul, .menu-right ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        .menu-left li, .menu-right li {
+            margin-bottom: 10px;
+        }
+    
+        .menu-left a:hover, 
+        .menu-right a:hover {
+            text-decoration: underline;
+            color: red; /* 赤色に変更 */
+        }
+    
+        .content {
+            flex: 1;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .content img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0;
+        }
+    
+        .content-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: stretch;
+            margin: 0;
+        }
+    
+        .content-container {
+            flex: 1;
+            max-width: 600px;
+            margin: 0;
+        }
+    
+        iframe {
+            width: 100%;
+            height: 315px;
+            margin: 0;
+        }
+    
+        /* Twitterタイムラインのスクロールを有効化 */
+        .twitter-container {
+            min-width: 300px;
+            max-height: 500px; /* タイムラインの高さを指定 */
+            overflow-y: auto; /* 縦方向のスクロールを有効化 */
+            border: 1px solid #ccc; /* 見やすくするために枠線を追加 */
+        }
+    
+        @media (max-width: 768px) {
+            .content-row {
+                flex-direction: column;
+            }
+        }
+
+    /* 右メニュー内のYouTube動画のスタイル */
+        .youtube-container-right iframe {
+        width: 100%; /* メニューの幅に合わせる */
+        height: 200px; /* 適切な高さに調整 */
+        margin-top: 10px; /* 少し余白を追加 */
+        }
+
+        .menu-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* コンテンツを中央揃え */
+        }
+
+    </style>
+    
+    <body>
+        <div class="container">
+            <!-- 左メニュー -->
+            <div class="menu-left">
+                <h2>左メニュー</h2>
+                <ul>
+                    <li><a href="https://heroaca.com/news/">News</a></li> 
+                    <li><a href="https://heroaca.com/onair/">On air</a></li>
+                    <li><a href="https://heroaca.com/introduction/">Introduction</a></li>
+                    <li><a href="https://heroaca.com/episodes/7th/">Episodes</a></li>
+                    <li><a href="https://heroaca.com/character/chara_group01/">Character</a></li>
+                    <li><a href="https://heroaca.com/staff/">Staff</a></li>
+                    <li><a href="https://heroaca.com/music/music_7th/">Music</a></li>
+                    <li><a href="https://heroaca.com/goods/">Goods</a></li>
+                    <li><a href="https://heroaca.com/bd_dvd/bddvd_7th/">Blu-ray&DVD</a></li>
+                    <li><a href="https://heroaca.com/books/">Books</a></li>
+                    <li><a href="https://heroaca.com/gallery/">Gallery</a></li>
+                    <li><a href="https://heroaca.com/movie/">Movie</a></li>
+                    <li><a href="https://heroaca.com/special/">Special</a></li>
+                </ul>
+            </div>
+    
+            <!-- 中央コンテンツ -->
+            <div class="content">
+                <img src="hiroakaanime2.jpg" width="1424" height="1365" alt="見出し画像">
+    
+                <main>
+                    <div class="content-row">
+                        <!-- YouTube埋め込み -->
+                        <div class="content-container youtube-container">
+                            <iframe 
+                                src="https://www.youtube.com/embed/E5pcEwi6ynk?si=IVRMcWfLFjNbmXQ-" 
+                                title="YouTube video player" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+    
+                        <!-- Twitterタイムライン -->
+                        <div class="content-container twitter-container">
+                            <a class="twitter-timeline" data-theme="dark" 
+                               href="https://twitter.com/heroaca_anime?ref_src=twsrc%5Etfw">
+                            </a>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    </div>
+                </main>
+            </div>
+    
+            <!-- 右メニュー -->
+            <div class="menu-right">
+                <h2>右メニュー</h2>
+                <ul>
+                    <li>
+                        <a href="https://heroaca.com/news/" target="_blank">
+                            <img src="bnr_19.jpg" alt="eiga" width="180">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://heroaca.com/onair/" target="_blank">
+                            <img src="onair.png" alt="On Air" width="180">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://heroaca.com/character/chara_group01/" target="_blank">
+                            <img src="character.png" alt="Character" width="180">
+                        </a>
+                    </li>
+                </ul>
+    
+                <!-- 右メニューのYouTube埋め込み -->
+                <div class="youtube-container-right">
+                    <iframe 
+                        src="https://www.youtube.com/embed/GgwUenaQqlM?si=cDVVcwoq_AOqN8cT" 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+
+
+</body>
+
+
