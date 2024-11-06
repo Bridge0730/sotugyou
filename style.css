@@ -1,0 +1,18 @@
+.gallery-container {
+    display: block;
+    margin: 1em 0;
+}
+.gallery {
+    width: 50vw;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin: 1em auto; /* 中央に配置 */
+}
+.gallery-container .gallery:nth-child(2) {
+    width: 60vw;
+    height: 60vh;
+}
