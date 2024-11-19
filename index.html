@@ -15,38 +15,92 @@
             background-color: #f4f4f4;
             overflow-x: hidden;
         }
+        /* おしゃれなロード画面のスタイル */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        #loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #loading-screen .spinner {
+            width: 50px;
+            height: 50px;
+            border: 6px solid transparent;
+            border-top-color: #333;
+            border-radius: 50%;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #loading-screen .progress-text {
+            font-size: 2em;
+            color: #333;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-family: 'Arial', sans-serif;
+        }
         header {
             width: 100%;
             padding: 1em;
             text-align: center;
             background-color: #333;
             color: #fff;
-        }
-        .gallery-container {
-            display: block;
-            margin: 1em 0;
-            cursor: pointer;
-        }
-        .gallery {
-            width: 70vw;
-            height: 70vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            font-size: 2em;
+            letter-spacing: 2px;
+            white-space: nowrap;
             overflow: hidden;
-            margin: 1em auto; /* 中央に配置 */
         }
-        .gallery img {
+                /* ギャラリーコンテナ */
+            .gallery-container {
+            position: relative;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            opacity: 0;
-            transition: opacity 1s ease;
+            overflow: hidden;
+            margin: 1em 0;
         }
+
+        /* 横スクロールギャラリー */
+        .gallery {
+            display: flex;
+            animation: slide 60s linear infinite; /* 横にスライドするアニメーション */
+        }
+
+        .gallery img {
+            width: 200px; /* すべての画像の幅を固定 */
+            height: 150px; /* すべての画像の高さを固定 */
+            object-fit: cover; /* アスペクト比を保ちながらトリミング */
+            border-radius: 8px;
+            border: 3px solid #fff; /* 枠線 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-right: 10px; /* 画像間の間隔 */
+        }
+
+        /* 横スクロールアニメーション */
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-2100px); /* 15枚分の幅を計算 (200px幅 + 10px間隔) */
+            }
+        }
+         
+
         footer {
             width: 100%;
             padding: 1em;
@@ -58,37 +112,144 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
             position: relative;
         }
+
         footer.show {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* 犬アニメーション */
+        #dog {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 250px;
+            height: 250px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: walk 5s linear infinite;
+        }
+
+        /* 歩くアニメーション */
+        @keyframes walk {
+            0% {
+                transform: translateX(0);
+                background-image: url('walk1.png');
+                opacity: 1;
+            }
+            20% {
+                background-image: url('walk1.png');
+                opacity: 1;
+            }
+            25% {
+                background-image: url('walk2.png');
+                opacity: 1;
+            }
+            45% {
+                background-image: url('walk2.png');
+                opacity: 1;
+            }
+            50% {
+                background-image: url('walk1.png');
+                opacity: 1;
+            }
+            70% {
+                background-image: url('walk1.png');
+                opacity: 1;
+            }
+            75% {
+                background-image: url('walk2.png');
+                opacity: 1;
+            }
+            95% {
+                background-image: url('walk2.png');
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw);
+                background-image: url('walk1.png');
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>卒業制作ギャラリー</h1>
-    </header>
-    
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <div class="progress-text" id="progress-text">0%</div>
+        <div id="dog"></div> <!-- 犬の歩行アニメーション用の要素 -->
+    </div>
+
+    <header id="header"></header>
+
     <div class="gallery-container">
         <div class="gallery" id="gallery-1">
-            <img src="IMG_1190.JPG" alt="Photo 1">
-            <img src="IMG_1315.JPG" alt="Photo 2">
-            <img src="IMG_1393.JPG" alt="Photo 3">
-            <img src="IMG_1398.JPG" alt="Photo 4">
-            <img src="IMG_1487.JPG" alt="Photo 5">
+            <!-- 16:9のアスペクト比を持つ15枚の画像リスト -->
+            <img src="1.JPG" alt="Photo 1">
+            <img src="2.JPG" alt="Photo 2">
+            <img src="3.JPG" alt="Photo 3">
+            <img src="4.JPG" alt="Photo 4">
+            <img src="5.JPG" alt="Photo 5">
+            <img src="6.JPG" alt="Photo 6">
+            <img src="7.JPG" alt="Photo 7">
+            <img src="8.JPG" alt="Photo 8">
+            <img src="9.JPG" alt="Photo 9">
+            <img src="10.JPG" alt="Photo 10">
+            <img src="11.JPG" alt="Photo 11">
+            <img src="12.JPG" alt="Photo 12">
+            <img src="13.jpg" alt="Photo 13">
+            <img src="14.jpg" alt="Photo 14">
+            <img src="15.JPG" alt="Photo 15">
         </div>
     </div>
 
     <footer id="footer">
-        <p>&copy; 2024 卒業制作ギャラリー</p>
+        <p>&copy; 2024 卒業制作ギャラリー 𣘺立隆成</p>
     </footer>
 
     <script>
+        // ページロード中の進行度を表示
+        const loadingScreen = document.getElementById('loading-screen');
+        const progressText = document.getElementById('progress-text');
+        let progress = 0;
+
+        // ロード時間を長くするために進行度を遅くする
+        const loadingInterval = setInterval(() => {
+            if (progress < 100) {
+                progress += 1;  // 進行度を少しずつ増やす
+                progressText.textContent = `${progress}%`;
+            } else {
+                clearInterval(loadingInterval);
+                loadingScreen.classList.add('fade-out');
+
+                // ロード画面が非表示になった後にヘッダーの文字を表示
+                setTimeout(() => {
+                    const headerElement = document.getElementById('header');
+                    const headerText = "イーストギャラリー";
+                    animateHeaderText(headerText, headerElement, 100);
+                }, 500);  // フェードアウトの時間と一致させる（0.5秒後に実行）
+            }
+        }, 65);  // インターバルを長くして、ロード時間を延長する（元々100msから50msに変更）
+
+        // ヘッダー文字を1文字ずつ表示する関数
+        function animateHeaderText(text, element, delay) {
+            let index = 0;
+            function showNextLetter() {
+                if (index < text.length) {
+                    element.textContent += text[index];
+                    index++;
+                    setTimeout(showNextLetter, delay);
+                }
+            }
+            showNextLetter();
+        }
+
+        // 他のコードはそのまま維持
         function displayRandomImage(gallery) {
             const images = gallery.querySelectorAll('img');
-            images.forEach(img => img.style.opacity = '0');
+            images.forEach(img => img.classList.remove('show'));
             const randomIndex = Math.floor(Math.random() * images.length);
-            images[randomIndex].style.opacity = '1';
+            images[randomIndex].classList.add('show');
         }
 
         const gallery = document.getElementById('gallery-1');
@@ -115,5 +276,6 @@
 
         window.addEventListener('scroll', handleScroll);
     </script>
+
 </body>
 </html>

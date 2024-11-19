@@ -1,18 +1,23 @@
-.gallery-container {
-    display: block;
-    margin: 1em 0;
-}
 .gallery {
-    width: 50vw;
-    height: 50vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    animation: slide 45s linear infinite;
     position: relative;
-    overflow: hidden;
-    margin: 1em auto; /* 中央に配置 */
 }
-.gallery-container .gallery:nth-child(2) {
-    width: 60vw;
-    height: 60vh;
+
+
+/* 16:9のアスペクト比を維持するための親要素の設定 */
+.gallery-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9のアスペクト比 (9 / 16 = 0.5625) */
+    overflow: hidden;
+}
+.gallery img {
+    width: 50%;
+    height: 50%;
+    object-fit: cover; /* 画像のアスペクト比を保ちつつ、16:9領域に合わせて切り抜く */
+    border-radius: 8px;
+    border: 3px solid #fff; /* ここで枠の色と太さを設定 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
