@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
             background-color: #f4f4f4;
             overflow-x: hidden;
         }
+
         /* おしゃれなロード画面のスタイル */
         #loading-screen {
             position: fixed;
@@ -31,10 +33,12 @@
             opacity: 1;
             transition: opacity 0.5s ease;
         }
+
         #loading-screen.fade-out {
             opacity: 0;
             pointer-events: none;
         }
+
         #loading-screen .spinner {
             width: 50px;
             height: 50px;
@@ -44,10 +48,17 @@
             animation: spin 1s ease-in-out infinite;
             margin-bottom: 20px;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
+
         #loading-screen .progress-text {
             font-size: 2em;
             color: #333;
@@ -55,6 +66,7 @@
             letter-spacing: 1px;
             font-family: 'Arial', sans-serif;
         }
+
         header {
             width: 100%;
             padding: 1em;
@@ -66,30 +78,38 @@
             white-space: nowrap;
             overflow: hidden;
         }
-                /* ギャラリーコンテナ */
-            .gallery-container {
+
+        /* ギャラリーコンテナ */
+        .gallery-container {
             position: relative;
             width: 100%;
             overflow: hidden;
             margin: 1em 0;
         }
 
-            /* 横スクロールギャラリー */
-            .gallery {
+        /* 横スクロールギャラリー */
+        .gallery {
             display: flex;
-            width: calc(15 * (200px + 10px)); /* 画像幅200px + 余白10px × 15枚 */
-            animation: slide 20s linear infinite; /* 横にスライドするアニメーション */
+            width: calc(15 * (200px + 10px));
+            /* 画像幅200px + 余白10px × 15枚 */
+            animation: slide 20s linear infinite;
+            /* 横にスライドするアニメーション */
         }
 
 
         .gallery img {
-            width: 400px; /* すべての画像の幅を固定 */
-            height: 300px; /* すべての画像の高さを固定 */
-            object-fit: cover; /* アスペクト比を保ちながらトリミング */
+            width: 400px;
+            /* すべての画像の幅を固定 */
+            height: 300px;
+            /* すべての画像の高さを固定 */
+            object-fit: cover;
+            /* アスペクト比を保ちながらトリミング */
             border-radius: 8px;
-            border: 3px solid #fff; /* 枠線 */
+            border: 3px solid #fff;
+            /* 枠線 */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-right: 10px; /* 画像間の間隔 */
+            margin-right: 10px;
+            /* 画像間の間隔 */
         }
 
         /* 横スクロールアニメーション */
@@ -97,26 +117,11 @@
             0% {
                 transform: translateX(0);
             }
+
             100% {
-                transform: translateX(-3000px); /* 17枚分の幅を計算 (200px幅 + 10px間隔) */
+                transform: translateX(-3000px);
+                /* 17枚分の幅を計算 (200px幅 + 10px間隔) */
             }
-        }
-
-        footer {
-            width: 100%;
-            padding: 1em;
-            text-align: center;
-            background-color: #333;
-            color: #fff;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            position: relative;
-        }
-
-        footer.show {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* 犬アニメーション */
@@ -138,34 +143,42 @@
                 background-image: url('walk1.png');
                 opacity: 1;
             }
+
             20% {
                 background-image: url('walk1.png');
                 opacity: 1;
             }
+
             25% {
                 background-image: url('walk2.png');
                 opacity: 1;
             }
+
             45% {
                 background-image: url('walk2.png');
                 opacity: 1;
             }
+
             50% {
                 background-image: url('walk1.png');
                 opacity: 1;
             }
+
             70% {
                 background-image: url('walk1.png');
                 opacity: 1;
             }
+
             75% {
                 background-image: url('walk2.png');
                 opacity: 1;
             }
+
             95% {
                 background-image: url('walk2.png');
                 opacity: 1;
             }
+
             100% {
                 transform: translateX(100vw);
                 background-image: url('walk1.png');
@@ -174,6 +187,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="loading-screen">
         <div class="spinner"></div>
@@ -206,12 +220,192 @@
         </div>
     </div>
 
-    <footer id="footer">
-        <p>&copy; 2024 卒業制作ギャラリー 𣘺立隆成</p>
-    </footer>
+    <title>クリック可能なメニューバー</title>
+    <style>
+        /* メニューバー全体のスタイル */
+        .menu-bar {
+            background-color: #333;
+            padding: 100px;
+            border-radius: 20px;
+        }
+    
+        /* メニューのリストスタイル */
+        .menu-bar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+    
+        /* メニュー項目スタイル */
+        .menu-bar ul li {
+            position: relative;
+            margin: 0 15px;
+        }
+    
+        /* リンクスタイル */
+        .menu-bar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: color 0.3s, transform 0.3s ease;
+        }
+    
+        .menu-bar ul li a:hover {
+            color: #ffcc00;
+            background-color: #555;
+            transform: scale(1.1);
+        }
+    
+        /* サブメニューのスタイル */
+        .dropdown-menu {
+            list-style: none;
+            margin: 0;
+            padding: 10px 0;
+            position: absolute;
+            top: calc(100% + 5px); /* メインメニュー項目の下に配置 */
+            left: 0; /* メインメニュー項目に揃える */
+            background-color: #444;
+            opacity: 0;
+            transform: translateY(-10px) scale(0.95);
+            visibility: hidden;
+            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* 前面に表示 */
+        }
+    
+        .dropdown-menu li {
+            padding: 10px 20px;
+        }
+    
+        .dropdown-menu li a {
+            color: white;
+            font-size: 14px;
+            display: block;
+            transition: background-color 0.3s, padding-left 0.3s;
+            border-radius: 5px;
+        }
+    
+        .dropdown-menu li a:hover {
+            background-color: #555;
+            padding-left: 30px;
+        }
+    
+        /* サブメニューが表示されるとき */
+        .dropdown-menu.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            visibility: visible;
+        }
+    </style>
+    
+    
+
+    </head>
+
+    <body>
+        <nav class="menu-bar">
+            <ul>
+                <li><a href="#home">ホーム</a></li>
+                <li class="dropdown">
+                    <a href="#about" class="dropdown-toggle">概要</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#team">チーム</a></li>
+                        <li><a href="#history">沿革</a></li>
+                        <li><a href="#vision">ビジョン</a></li>
+                    </ul>
+                </li>
+                <li><a href="#services">サービス</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+        <script>
+            // ドロップダウンメニューのクリックイベントを設定
+            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                toggle.addEventListener('click', event => {
+                    event.preventDefault(); // デフォルトのリンク動作を無効化
+
+                    // 対応するサブメニューを取得
+                    const dropdownMenu = toggle.nextElementSibling;
+
+                    // 他のサブメニューを閉じる
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        if (menu !== dropdownMenu) {
+                            menu.classList.remove('active');
+                        }
+                    });
+
+                    // サブメニューの表示・非表示を切り替え
+                    dropdownMenu.classList.toggle('active');
+                });
+            });
+
+            // メニュー外をクリックした場合にすべて閉じる
+            document.addEventListener('click', event => {
+                if (!event.target.closest('.menu-bar')) {
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                }
+            });
+        </script>
+    </body>
+
+    <title>スクロールでフッター表示</title>
+    <style>
+        /* フッターのスタイル */
+        #customFooter {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            display: none;
+            /* 初期状態では非表示 */
+            z-index: 9999;
+            /* 他の要素より上に表示 */
+        }
+    </style>
+    </head>
+
+    <body>
+        <div style="height: 200vh; padding: 20px;">
+            <!-- <h1>スクロールでフッターを表示</h1>
+        <p>このページを下までスクロールしてください。</p>
+        <p>フッターが一番下に到達したときに表示されます。</p> -->
+        </div>
+
+        <footer id="customFooter">
+            <p>&copy; 2024 卒業制作ギャラリー 𣘺立隆成</p>
+        </footer>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const footer = document.getElementById("customFooter");
+
+                window.addEventListener("scroll", () => {
+                    const scrollPosition = window.scrollY + window.innerHeight;
+                    const documentHeight = document.documentElement.scrollHeight;
+
+                    // ページ最下部に到達したらフッターを表示
+                    if (scrollPosition >= documentHeight) {
+                        footer.style.display = "block";
+                    } else {
+                        footer.style.display = "none";
+                    }
+                });
+            });
+        </script>
+    </body>
 
     <script>
-        // ページロード中の進行度を表示
+        // ページロード中の進行度を表示 制作中は非表示
         const loadingScreen = document.getElementById('loading-screen');
         const progressText = document.getElementById('progress-text');
         let progress = 0;
@@ -247,15 +441,16 @@
             showNextLetter();
         }
 
-        // 他のコードはそのまま維持
-        function displayRandomImage(gallery) {
-            const images = gallery.querySelectorAll('img');
-            images.forEach(img => img.classList.remove('show'));
-            const randomIndex = Math.floor(Math.random() * images.length);
-            images[randomIndex].classList.add('show');
-        }
-        
+        // // 他のコードはそのまま維持
+        // function displayRandomImage(gallery) {
+        //     const images = gallery.querySelectorAll('img');
+        //     images.forEach(img => img.classList.remove('show'));
+        //     const randomIndex = Math.floor(Math.random() * images.length);
+        //     images[randomIndex].classList.add('show');
+        // }
+
     </script>
 
 </body>
+
 </html>
