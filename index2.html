@@ -11,11 +11,51 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
             background-color: #f4f4f9;
         }
+
+        header {
+            width: 100%;
+            background: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: #0a0a0a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .back-button:hover {
+            background: #ddf101;
+            /* ホバー時の色を濃い緑に変更 */
+            transform: scale(1.05);
+        }
+
+        .back-button:active {
+            transform: scale(0.95);
+        }
+
 
         .gallery {
             display: grid;
@@ -43,7 +83,6 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        /* モーダルのスタイル */
         .modal {
             display: none;
             position: fixed;
@@ -70,7 +109,6 @@
             align-items: center;
         }
 
-        /* キャプションのスタイル */
         .modal-caption {
             margin-top: 10px;
             color: #fff;
@@ -80,7 +118,6 @@
             line-height: 1.5;
         }
 
-        /* 閉じるボタン */
         .modal-close {
             position: absolute;
             top: 20px;
@@ -98,20 +135,11 @@
             color: black;
         }
 
-        /* クリックアニメーション */
-        .gallery img:active {
-            transform: scale(0.95);
-            opacity: 0.8;
-            transition: transform 0.1s, opacity 0.1s;
-        }
-
-        /* モーダルを開くときのフェードイン */
         .modal {
             opacity: 0;
             animation: fadeIn 0.3s forwards;
         }
 
-        /* モーダルのフェードインアニメーション */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -124,30 +152,14 @@
             }
         }
     </style>
-
-    <script>
-        document.querySelectorAll('.gallery img').forEach(img => {
-            img.addEventListener('click', () => {
-                img.classList.add('clicked');
-                setTimeout(() => img.classList.remove('clicked'), 200); // アニメーション終了後クラスを削除
-            });
-        });
-
-        document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') { // ESCキーが押された場合
-            const openModal = document.querySelector('.modal:target');
-            if (openModal) {
-                window.location.hash = ''; // モーダルを閉じる（ハッシュをリセット）
-            }
-        }
-    });
-    </script>
-    
 </head>
 
 <body>
+    <a href="index.html" class="back-button">ホームに戻る</a> <!-- ホーム画面へのリンク -->
+    <header>
+        <h1>2016年と2017年のギャラリー</h1>
+    </header>
     <div class="gallery">
-        <!-- サムネイル -->
         <a href="#modal1"><img src="2016_1.jpg" alt="写真1"></a>
         <a href="#modal2"><img src="2016_2.jpg" alt="写真2"></a>
         <a href="#modal3"><img src="2017_1.jpg" alt="写真3"></a>
@@ -157,8 +169,6 @@
         <a href="#modal7"><img src="2017_5.jpg" alt="写真7"></a>
         <a href="#modal8"><img src="2017_6.jpg" alt="写真8"></a>
     </div>
-
-    <!-- モーダルウィンドウ -->
     <div id="modal1" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2016_1.jpg" alt="写真1">
@@ -200,5 +210,15 @@
         <div class="modal-caption">あ</div>
     </div>
 </body>
+<script>
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') { // ESCキーが押された場合
+            const openModal = document.querySelector('.modal:target');
+            if (openModal) {
+                window.location.hash = ''; // モーダルを閉じる（ハッシュをリセット）
+            }
+        }
+    });
+</script>
 
 </html>

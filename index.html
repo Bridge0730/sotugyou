@@ -17,7 +17,7 @@
             overflow-x: hidden;
         }
 
-        /* おしゃれなロード画面のスタイル */
+        /* おしゃれなロード画面のスタイル
         #loading-screen {
             position: fixed;
             top: 0;
@@ -47,8 +47,8 @@
             border-radius: 50%;
             animation: spin 1s ease-in-out infinite;
             margin-bottom: 20px;
-        }
-
+        } */
+/* 
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -65,7 +65,7 @@
             font-weight: bold;
             letter-spacing: 1px;
             font-family: 'Arial', sans-serif;
-        }
+        } */
 
         header {
             width: 100%;
@@ -136,62 +136,14 @@
             animation: walk 5s linear infinite;
         }
 
-        /* 歩くアニメーション */
-        @keyframes walk {
-            0% {
-                transform: translateX(0);
-                background-image: url('walk1.png');
-                opacity: 1;
-            }
-
-            20% {
-                background-image: url('walk1.png');
-                opacity: 1;
-            }
-
-            25% {
-                background-image: url('walk2.png');
-                opacity: 1;
-            }
-
-            45% {
-                background-image: url('walk2.png');
-                opacity: 1;
-            }
-
-            50% {
-                background-image: url('walk1.png');
-                opacity: 1;
-            }
-
-            70% {
-                background-image: url('walk1.png');
-                opacity: 1;
-            }
-
-            75% {
-                background-image: url('walk2.png');
-                opacity: 1;
-            }
-
-            95% {
-                background-image: url('walk2.png');
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateX(100vw);
-                background-image: url('walk1.png');
-                opacity: 1;
-            }
-        }
+ 
     </style>
 </head>
 
 <body>
     <div id="loading-screen">
         <div class="spinner"></div>
-        <div class="progress-text" id="progress-text">0%</div>
+        <div class="progress-text" id="progress-text"></div>
         <div id="dog"></div> <!-- 犬の歩行アニメーション用の要素 -->
     </div>
 
@@ -334,12 +286,8 @@
                     <a href="#about" class="dropdown-toggle">ギャラリー</a>
                     <ul class="dropdown-menu">
                         <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index2.html">ギャラリー1</a></li>
-                        <li><a href="#history">あ</a></li>
-                        <li><a href="#vision">あ</a></li>
                     </ul>
                 </li>
-                <li><a href="#services">あ</a></li>
-                <li><a href="#contact">あ</a></li>
             </ul>
         </nav>
         <script>
@@ -437,18 +385,8 @@
                 <p>トイ・プードル</p>
             </div>
             <div class="profile-info">
-                <h2>自己紹介</h2>
-                <p>こんにちは！私はWebデザイナーとして働いています。デザインやユーザーエクスペリエンスに情熱を注いでおり、日々新しい技術を学びながらクリエイティブなプロジェクトに取り組んでいます。</p>
-                <h2>経歴</h2>
-                <p>東京大学卒業後、フリーランスとしてWebデザインの仕事を始めました。現在は、複数の企業と協力し、プロジェクトを進行中です。</p>
-                <h2>スキル</h2>
-                <ul>
-                    <li>HTML, CSS, JavaScript</li>
-                    <li>Adobe Photoshop, Illustrator</li>
-                    <li>UX/UIデザイン</li>
-                </ul>
-                <h2>趣味</h2>
-                <p>音楽を聴くこと、旅行、写真撮影が好きです。</p>
+                <h2>生年月日</h2>
+                <p>2014年8月30日</p>
             </div>
         </div>
     </body>
@@ -504,28 +442,28 @@
     </body>
 
     <script>
-        // ページロード中の進行度を表示 制作中は非表示
-        const loadingScreen = document.getElementById('loading-screen');
-        const progressText = document.getElementById('progress-text');
-        let progress = 0;
+        // // ページロード中の進行度を表示 制作中は非表示
+        // const loadingScreen = document.getElementById('loading-screen');
+        // const progressText = document.getElementById('progress-text');
+        // let progress = 0;
 
-        // ロード時間を長くするために進行度を遅くする
-        const loadingInterval = setInterval(() => {
-            if (progress < 100) {
-                progress += 1;  // 進行度を少しずつ増やす
-                progressText.textContent = `${progress}%`;
-            } else {
-                clearInterval(loadingInterval);
-                loadingScreen.classList.add('fade-out');
+        // // ロード時間を長くするために進行度を遅くする
+        // const loadingInterval = setInterval(() => {
+        //     if (progress < 100) {
+        //         progress += 1;  // 進行度を少しずつ増やす
+        //         progressText.textContent = `${progress}%`;
+        //     } else {
+        //         clearInterval(loadingInterval);
+        //         loadingScreen.classList.add('fade-out');
 
-                // ロード画面が非表示になった後にヘッダーの文字を表示
-                setTimeout(() => {
-                    const headerElement = document.getElementById('header');
-                    const headerText = "イーストギャラリー";
-                    animateHeaderText(headerText, headerElement, 100);
-                }, 500);  // フェードアウトの時間と一致させる（0.5秒後に実行）
-            }
-        }, 65);  // インターバルを長くして、ロード時間を延長する（元々100msから50msに変更）
+        //         // ロード画面が非表示になった後にヘッダーの文字を表示
+        //         setTimeout(() => {
+        //             const headerElement = document.getElementById('header');
+        //             const headerText = "イーストギャラリー";
+        //             animateHeaderText(headerText, headerElement, 100);
+        //         }, 500);  // フェードアウトの時間と一致させる（0.5秒後に実行）
+        //     }
+        // }, 65);  // インターバルを長くして、ロード時間を延長する（元々100msから50msに変更）
 
         // ヘッダー文字を1文字ずつ表示する関数
         function animateHeaderText(text, element, delay) {
