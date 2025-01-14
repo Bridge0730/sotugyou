@@ -3,45 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スクロールでフッター表示</title>
-    <style>
-        /* フッターのスタイル */
-        #footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            display: none; /* 初期状態では非表示 */
-        }
-    </style>
+    <title>画像アップロード</title>
 </head>
 <body>
-    <div style="height: 200vh; padding: 20px;">
-        <h1>スクロールでフッターを表示</h1>
-        <p>このページを下までスクロールしてください。</p>
-        <p>フッターが一番下に到達したときに表示されます。</p>
-    </div>
+    <h2>画像をアップロードしてください</h2>
 
-    <footer id="footer">
-        <p>&copy; 2024 卒業制作ギャラリー 𣘺立隆成</p>
-    </footer>
+    <!-- ファイル入力 -->
+    <input type="file" id="fileInput" accept="image/*">
+
+    <!-- アップロードされた画像を表示 -->
+    <br><br>
+    <img id="uploadedImage" src="" alt="アップロードされた画像" style="max-width: 100%; display: none;">
 
     <script>
-        // スクロールイベントを監視
-        window.addEventListener("scroll", () => {
-            const footer = document.getElementById("footer");
-            const scrollPosition = window.scrollY + window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-
-            // ページ最下部に到達したらフッターを表示
-            if (scrollPosition >= documentHeight) {
-                footer.style.display = "block"; // 表示
-            } else {
-                footer.style.display = "none"; // 非表示
+        // ファイル入力のイベントリスナー
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            // ファイルが選ばれた場合
+            const file = event.target.files[0];
+            if (file) {
+                // FileReaderを使用して画像を表示する
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageElement = document.getElementById('uploadedImage');
+                    imageElement.src = e.target.result; // 読み込んだ画像データを設定
+                    imageElement.style.display = 'block'; // 画像を表示
+                };
+                reader.readAsDataURL(file); // ファイルをDataURLとして読み込む
             }
         });
     </script>
