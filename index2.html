@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2016</title>
+    <title>2016～2017</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,7 +19,7 @@
 
         header {
             width: 100%;
-            background: #ffffff;
+            background: #333;
             padding: 20px 0;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -29,33 +29,8 @@
         header h1 {
             margin: 0;
             font-size: 24px;
-            color: #333;
+            color: #ffffff;
         }
-
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 10px 20px;
-            background: #0a0a0a;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .back-button:hover {
-            background: #ddf101;
-            /* ホバー時の色を濃い緑に変更 */
-            transform: scale(1.05);
-        }
-
-        .back-button:active {
-            transform: scale(0.95);
-        }
-
 
         .gallery {
             display: grid;
@@ -155,10 +130,10 @@
 </head>
 
 <body>
-    <a href="index.html" class="back-button">ホームに戻る</a> <!-- ホーム画面へのリンク -->
     <header>
-        <h1>2016年と2017年のギャラリー</h1>
+        <h1>2016~2017</h1>
     </header>
+
     <div class="gallery">
         <a href="#modal1"><img src="2016_1.jpg" alt="写真1"></a>
         <a href="#modal2"><img src="2016_2.jpg" alt="写真2"></a>
@@ -220,5 +195,32 @@
         }
     });
 </script>
+
+    <title>ホームに戻るボタン</title>
+    <style>
+        /* ボタンのスタイル */
+        .home-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            color: #fffb00; /* ホバー時に文字を光るように設定 */
+        }
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='index.html'" class="home-button">ホーム</button>
+</body>
+</html>
 
 </html>

@@ -17,56 +17,6 @@
             overflow-x: hidden;
         }
 
-        /* おしゃれなロード画面のスタイル
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #84fab0, #8fd3f4);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        #loading-screen.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        #loading-screen .spinner {
-            width: 50px;
-            height: 50px;
-            border: 6px solid transparent;
-            border-top-color: #333;
-            border-radius: 50%;
-            animation: spin 1s ease-in-out infinite;
-            margin-bottom: 20px;
-        } */
-/* 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        #loading-screen .progress-text {
-            font-size: 2em;
-            color: #333;
-            font-weight: bold;
-            letter-spacing: 1px;
-            font-family: 'Arial', sans-serif;
-        } */
-
         header {
             width: 100%;
             padding: 1em;
@@ -96,13 +46,12 @@
             /* 横にスライドするアニメーション */
         }
 
-
         .gallery img {
             width: 400px;
             /* すべての画像の幅を固定 */
             height: 300px;
             /* すべての画像の高さを固定 */
-            object-fit: cover;
+            /* object-fit: cover; */
             /* アスペクト比を保ちながらトリミング */
             border-radius: 8px;
             border: 3px solid #fff;
@@ -124,34 +73,60 @@
             }
         }
 
-        /* 犬アニメーション */
-        #dog {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            width: 250px;
-            height: 250px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            animation: walk 5s linear infinite;
-        }
-
- 
     </style>
 </head>
 
 <body>
-    <div id="loading-screen">
-        <div class="spinner"></div>
-        <div class="progress-text" id="progress-text"></div>
-        <div id="dog"></div> <!-- 犬の歩行アニメーション用の要素 -->
-    </div>
-
-    <header id="header"></header>
+    <title>ヘッダー表示</title>
+    <style>
+        /* ヘッダーのスタイル */
+        #header {
+          background-color: #333;
+          color: white;
+          padding: 20px;
+          text-align: center;
+          font-size: 2rem;
+          font-family: 'Arial', sans-serif;
+          overflow: hidden; /* 必要に応じて隠れる部分を制御 */
+        }
+    
+        /* 文字を非表示にするスタイル */
+        .hidden {
+          visibility: hidden;
+        }
+      </style>
+    </head>
+    <body>
+      <header id="header"></header>
+    
+      <script>
+        // ヘッダーに表示するテキスト
+        const headerText = "イーストギャラリー";
+        const headerElement = document.getElementById('header');
+    
+        // 文字を1つずつ表示する関数
+        function animateText(text, element, delay = 100) {
+          element.textContent = ''; // ヘッダーを初期化
+          [...text].forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.classList.add('hidden');
+            element.appendChild(span);
+    
+            // 指定時間ごとに文字を表示
+            setTimeout(() => {
+              span.classList.remove('hidden');
+            }, index * delay);
+          });
+        }
+    
+        // アニメーション実行
+        animateText(headerText, headerElement, 150);
+      </script>
+    </body>
 
     <div class="gallery-container">
         <div class="gallery" id="gallery-1">
-            <!-- 16:9のアスペクト比を持つ15枚の画像リスト -->
             <img src="1.JPG" alt="Photo 1">
             <img src="2.JPG" alt="Photo 2">
             <img src="3.JPG" alt="Photo 3">
@@ -285,7 +260,9 @@
                 <li class="dropdown">
                     <a href="#about" class="dropdown-toggle">ギャラリー</a>
                     <ul class="dropdown-menu">
-                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index2.html">ギャラリー1</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index2.html">2016~2017</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index3.html">2018</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index4.html">2019</a></li>
                     </ul>
                 </li>
             </ul>
@@ -412,7 +389,7 @@
     </head>
 
     <body>
-        <div style="height: 200vh; padding: 20px;">
+        <div style="height: 35vh; padding: 20px;">
             <!-- <h1>スクロールでフッターを表示</h1>
         <p>このページを下までスクロールしてください。</p>
         <p>フッターが一番下に到達したときに表示されます。</p> -->
@@ -442,49 +419,6 @@
     </body>
 
     <script>
-        // // ページロード中の進行度を表示 制作中は非表示
-        // const loadingScreen = document.getElementById('loading-screen');
-        // const progressText = document.getElementById('progress-text');
-        // let progress = 0;
-
-        // // ロード時間を長くするために進行度を遅くする
-        // const loadingInterval = setInterval(() => {
-        //     if (progress < 100) {
-        //         progress += 1;  // 進行度を少しずつ増やす
-        //         progressText.textContent = `${progress}%`;
-        //     } else {
-        //         clearInterval(loadingInterval);
-        //         loadingScreen.classList.add('fade-out');
-
-        //         // ロード画面が非表示になった後にヘッダーの文字を表示
-        //         setTimeout(() => {
-        //             const headerElement = document.getElementById('header');
-        //             const headerText = "イーストギャラリー";
-        //             animateHeaderText(headerText, headerElement, 100);
-        //         }, 500);  // フェードアウトの時間と一致させる（0.5秒後に実行）
-        //     }
-        // }, 65);  // インターバルを長くして、ロード時間を延長する（元々100msから50msに変更）
-
-        // ヘッダー文字を1文字ずつ表示する関数
-        function animateHeaderText(text, element, delay) {
-            let index = 0;
-            function showNextLetter() {
-                if (index < text.length) {
-                    element.textContent += text[index];
-                    index++;
-                    setTimeout(showNextLetter, delay);
-                }
-            }
-            showNextLetter();
-        }
-
-        // // 他のコードはそのまま維持
-        // function displayRandomImage(gallery) {
-        //     const images = gallery.querySelectorAll('img');
-        //     images.forEach(img => img.classList.remove('show'));
-        //     const randomIndex = Math.floor(Math.random() * images.length);
-        //     images[randomIndex].classList.add('show');
-        // }
 
     </script>
 
