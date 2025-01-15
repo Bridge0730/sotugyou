@@ -243,6 +243,15 @@
 
 <body>
     <button onclick="window.location.href='index.html'" class="home-button">ホーム</button>
+
+    <script>
+        // escキーが押されたときにホームに戻る処理
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
 </body>
 
 </html>

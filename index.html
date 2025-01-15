@@ -149,27 +149,27 @@
 
     <title>クリック可能なメニューバー</title>
     <style>
-        /* メニューバー全体のスタイル */
-        .menu-bar {
-            background-color: #333;
-            padding: 50px;
-            border-radius: 20px;
-        }
-
         /* メニューのリストスタイル */
         .menu-bar ul {
             list-style: none;
             margin: 0;
             padding: 0;
             display: flex;
+            flex-wrap: wrap; /* 折り返しを有効化 */
+            gap: 15px; /* 項目間の隙間 */
         }
-
+    
         /* メニュー項目スタイル */
         .menu-bar ul li {
             position: relative;
-            margin: 0 15px;
+            margin: 0;
         }
-
+    
+        /* ホームとギャラリーの間に特定のスペースを追加 */
+        .menu-bar ul li:first-child {
+            margin-right: 100px; /* ホームとギャラリーの間にスペースを追加 */
+        }
+    
         /* リンクスタイル */
         .menu-bar ul li a {
             text-decoration: none;
@@ -177,80 +177,101 @@
             font-size: 16px;
             padding: 10px 15px;
             border-radius: 10px;
-            transition: color 0.3s, transform 0.3s ease;
+            transition: all 0.3s ease;
+            white-space: nowrap; /* テキストの折り返しを無効化 */
         }
-
+    
         .menu-bar ul li a:hover {
             color: #ffcc00;
-            background-color: #555;
             transform: scale(1.1);
         }
-
-        /* サブメニューのスタイル */
+    
+        /* ドロップダウンメニューのスタイル */
         .dropdown-menu {
             list-style: none;
             margin: 0;
-            padding: 10px 0;
+            padding: 10px; /* 内側の余白を調整 */
             position: absolute;
-            top: calc(100% + 5px);
-            /* メインメニュー項目の下に配置 */
+            top: calc(100% + 10px); /* 親メニューの下に配置 */
             left: 0;
-            /* メインメニュー項目に揃える */
-            background-color: #444;
             opacity: 0;
-            transform: translateY(-10px) scale(0.95);
+            transform: scale(0.5); /* 初期状態で小さく表示 */
             visibility: hidden;
-            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+            transition: opacity 0.5s ease, transform 0.5s ease; /* 拡大とフェードインをスムーズに */
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             z-index: 1000;
-            /* 前面に表示 */
             display: flex;
-            /* 横並びにする */
-            flex-wrap: nowrap;
-            /* 折り返しを無効化 */
+            flex-wrap: wrap; /* 項目が多い場合に折り返す */
+            gap: 10px; /* サブメニューの間隔 */
+            width: 300px; /* ドロップダウンメニューの幅を指定 */
+            max-height: 250px; /* 高さの最大値を指定 */
+            overflow-y: auto; /* 高さが超えた場合スクロールを有効化 */
         }
-
+    
         /* サブメニュー項目のスタイル */
         .dropdown-menu li {
-            padding: 10px 20px;
+            padding: 10px 10px; /* 項目の内側余白 */
+            width: calc(50% - 10px); /* 横幅を調整して折り返し */
+            box-sizing: border-box; /* パディングを含めて幅を計算 */
         }
-
-        /* サブメニューのリンクスタイル */
+    
         .dropdown-menu li a {
             color: white;
             font-size: 14px;
             display: block;
             transition: background-color 0.3s, padding-left 0.3s;
             border-radius: 5px;
-            white-space: nowrap;
-            /* テキストの折り返しを無効化 */
+            white-space: nowrap; /* テキストの折り返しを無効化 */
         }
-
-        .dropdown-menu li {
-            padding: 10px 20px;
-        }
-
-        .dropdown-menu li a {
-            color: white;
-            font-size: 14px;
-            display: block;
-            transition: background-color 0.3s, padding-left 0.3s;
-            border-radius: 5px;
-        }
-
-        .dropdown-menu li a:hover {
-            background-color: #555;
-            padding-left: 30px;
-        }
-
+    
         /* サブメニューが表示されるとき */
         .dropdown-menu.active {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: scale(1); /* ホバー時に元の大きさに戻す */
             visibility: visible;
         }
+    
+        /* ホバー時の派手なアニメーション */
+        .menu-bar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: all 0.5s ease; /* アニメーション効果を追加 */
+            position: relative;
+            z-index: 1;
+            overflow: hidden; /* 子要素がはみ出さないようにする */
+        }
+    
+        .menu-bar ul li a:hover {
+            color: #ffcc00;
+            transform: scale(1.2) rotate(3deg); /* 拡大 + 回転 */
+            background: linear-gradient(135deg, #ff4b2b, #ffcc00); /* 背景色を派手なグラデーションに */
+            box-shadow: 0 10px 20px rgba(255, 76, 41, 0.6); /* 派手な影 */
+        }
+    
+        /* ホバー時の背景エフェクト */
+        .menu-bar ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255, 76, 41, 0.6), rgba(255, 204, 0, 0.8));
+            transform: skewX(-25deg);
+            z-index: -1; /* 背景エフェクトを後ろに配置 */
+            transition: left 0.5s ease-in-out;
+        }
+    
+        .menu-bar ul li a:hover::before {
+            left: 0; /* 背景エフェクトがスライドして表示される */
+        }
     </style>
+    
+    
     </head>
 
     <body>
@@ -263,6 +284,11 @@
                         <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index2.html">2016~2017</a></li>
                         <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index3.html">2018</a></li>
                         <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index4.html">2019</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index5.html">2020</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index6.html">2021</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index7.html">2022</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index8.html">2023</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index9.html">2024</a></li>
                     </ul>
                 </li>
             </ul>
@@ -272,22 +298,25 @@
             document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
                 toggle.addEventListener('click', event => {
                     event.preventDefault(); // デフォルトのリンク動作を無効化
-
+        
                     // 対応するサブメニューを取得
                     const dropdownMenu = toggle.nextElementSibling;
-
+        
                     // 他のサブメニューを閉じる
                     document.querySelectorAll('.dropdown-menu').forEach(menu => {
                         if (menu !== dropdownMenu) {
                             menu.classList.remove('active');
                         }
                     });
-
+        
                     // サブメニューの表示・非表示を切り替え
                     dropdownMenu.classList.toggle('active');
+        
+                    // サブメニューが画面内に収まるように調整
+                    adjustDropdownPosition(dropdownMenu);
                 });
             });
-
+        
             // メニュー外をクリックした場合にすべて閉じる
             document.addEventListener('click', event => {
                 if (!event.target.closest('.menu-bar')) {
@@ -296,7 +325,29 @@
                     });
                 }
             });
+        
+            // ドロップダウンメニューの位置を調整
+            function adjustDropdownPosition(menu) {
+                const rect = menu.getBoundingClientRect(); // 要素の位置とサイズを取得
+                const viewportWidth = window.innerWidth;  // 画面幅
+                const viewportHeight = window.innerHeight; // 画面高さ
+        
+                // 右側が画面幅を超えている場合
+                if (rect.right > viewportWidth) {
+                    menu.style.left = `-${rect.right - viewportWidth + 10}px`;
+                } else {
+                    menu.style.left = ""; // デフォルト値を適用
+                }
+        
+                // 下側が画面高さを超えている場合
+                if (rect.bottom > viewportHeight) {
+                    menu.style.top = `-${rect.height + 10}px`; // 上に表示
+                } else {
+                    menu.style.top = ""; // デフォルト値を適用
+                }
+            }
         </script>
+        
     </body>
 
     <title>プロフィール</title>
@@ -364,6 +415,7 @@
             <div class="profile-info">
                 <h2>生年月日</h2>
                 <p>2014年8月30日</p>
+                <p>人形を振り回して遊ぶのが好きです</p>
             </div>
         </div>
     </body>
@@ -390,9 +442,6 @@
 
     <body>
         <div style="height: 25vh; padding: 20px;">
-            <!-- <h1>スクロールでフッターを表示</h1>
-        <p>このページを下までスクロールしてください。</p>
-        <p>フッターが一番下に到達したときに表示されます。</p> -->
         </div>
 
         <footer id="customFooter">
@@ -418,10 +467,5 @@
         </script>
     </body>
 
-    <script>
-
-    </script>
-
 </body>
-
 </html>

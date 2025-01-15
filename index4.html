@@ -216,34 +216,40 @@
         });
     </script>
 
-    <title>ホームに戻るボタン</title>
-    <style>
-        /* ボタンのスタイル */
-        .home-button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #333;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            text-align: center;
-            cursor: pointer;
-            transition: color 0.3s ease, background-color 0.3s ease;
-        }
+<title>ホームに戻るボタン</title>
+<style>
+    /* ボタンのスタイル */
+    .home-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #333;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+        transition: color 0.3s ease, background-color 0.3s ease;
+    }
 
-        .home-button:hover {
-            color: #fffb00;
-            /* ホバー時に文字を光るように設定 */
-        }
-    </style>
-    </head>
+    .home-button:hover {
+        color: #fffb00;
+        /* ホバー時に文字を光るように設定 */
+    }
+</style>
+</head>
 
-    <body>
-        <button onclick="window.location.href='index.html'" class="home-button">ホーム</button>
-    </body>
+<body>
+    <button onclick="window.location.href='index.html'" class="home-button">ホーム</button>
 
-</html>
-
+    <script>
+        // escキーが押されたときにホームに戻る処理
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
 </html>
