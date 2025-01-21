@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2021</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            width: 100%;
+            background: #333;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #ffffff;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            max-width: 1000px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            object-fit: contain;
+            border-radius: 5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal:target {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-caption {
+            margin-top: 10px;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+            max-width: 90%;
+            line-height: 1.5;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: black;
+        }
+
+        .modal {
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>2021</h1>
+    </header>
+    <div class="gallery">
+        <a href="#modal1"><img src="2021_1.jpg" alt="写真1"></a>
+        <a href="#modal2"><img src="2021_2.jpg" alt="写真2"></a>
+        <a href="#modal3"><img src="2021_3.jpg" alt="写真3"></a>
+        <a href="#modal4"><img src="2021_4.jpg" alt="写真4"></a>
+        <a href="#modal5"><img src="2021_5.jpg" alt="写真5"></a>
+        <a href="#modal6"><img src="2021_6.jpg" alt="写真6"></a>
+        <a href="#modal7"><img src="2021_7.jpg" alt="写真7"></a>
+        <a href="#modal8"><img src="2021_8.jpg" alt="写真8"></a>
+        <a href="#modal9"><img src="2021_9.jpg" alt="写真9"></a>
+        <a href="#modal10"><img src="2021_10.jpg" alt="写真10"></a>
+    </div>
+    <div id="modal1" class="modal">
+        <a href="#" class="modal-close">×</a>
+        <img src="2021_1.jpg" alt="写真1">
+        <div class="modal-caption" contenteditable="true">ドッグランでの1枚</div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <a href="#" class="modal-close">×</a>
+        <img src="2021_2.jpg" alt="写真2">
+        <div class="modal-caption" contenteditable="true">写真2のキャプション</div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <a href="#" class="modal-close">×</a>
+        <img src="2021_3.jpg" alt="写真3">
+        <div class="modal-caption" contenteditable="true">写真3のキャプション</div>
+    </div>
+
+    <div id="modal4" class="modal">
+        <a href="#" class="modal-close">×</a>
+        <img src="2021_4.jpg" alt="写真4">
+        <div class="modal-caption" contenteditable="true">写真4のキャプション</div>
+    </div>
+
+    <div id="modal5" class="modal">
+        <a href="#" class="modal-close">×</a>
+        <img src="2021_5.jpg" alt="写真5">
+        <div class="modal-caption" contenteditable="true">写真5のキャプション</div>
+    </div>
+
+    <div id="modal6" class="modal">
+        <a href="#" class="modal-close">×</a>
+        <img src="2021_6.jpg" alt="写真6">
+        <div class="modal-caption" contenteditable="true">写真6のキャプション</div>
+    </div>
+
+    <div id="modal7" class="modal">
+        <a href="#" class="modal-close">×</a>
+        <img src="2021_7.jpg" alt="写真7">
+        <div class="modal-caption" contenteditable="true">写真7のキャプション</div>
+    </div>
+
+    <div id="modal8" class="modal">
+        <a href="#" class="modal-close">×</a>
+        <img src="2021_8.jpg" alt="写真8">
+        <div class="modal-caption" contenteditable="true">写真8のキャプション</div>
+    </div>
+
+    <div id="modal9" class="modal">
+        <a href="#" class="modal-close">×</a>
+        <img src="2021_9.jpg" alt="写真9">
+        <div class="modal-caption" contenteditable="true">写真9のキャプション</div>
+    </div>
+
+    <div id="modal10" class="modal">
+        <a href="#" class="modal-close">×</a>
+        <img src="2021_10.jpg" alt="写真10">
+        <div class="modal-caption" contenteditable="true">写真10のキャプション</div>
+    </div>
+
+    <script>
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                const openModal = document.querySelector('.modal:target');
+                if (openModal) {
+                    window.location.hash = '';
+                }
+            }
+        });
+    </script>
+
+    <title>ホームに戻るボタン</title>
+    <style>
+        .home-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            color: #fffb00;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="window.location.href='index.html'" class="home-button">ホーム</button>
+
+    <script>
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
