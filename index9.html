@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2018</title>
+    <title>2024</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -131,125 +131,123 @@
 
 <body>
     <header>
-        <h1>2019</h1>
+        <h1>2024</h1>
     </header>
     <div class="gallery">
-        <a href="#modal1"><img src="2019_1.jpg" alt="写真1"></a>
-        <a href="#modal2"><img src="2019_2.jpg" alt="写真2"></a>
-        <a href="#modal3"><img src="2019_3.jpg" alt="写真3"></a>
-        <a href="#modal4"><img src="2019_4.jpg" alt="写真4"></a>
-        <a href="#modal5"><img src="2019_5.jpg" alt="写真5"></a>
-        <a href="#modal6"><img src="2019_6.jpg" alt="写真6"></a>
-        <a href="#modal7"><img src="2019_7.jpg" alt="写真7"></a>
-        <a href="#modal8"><img src="2019_8.jpg" alt="写真8"></a>
-        <a href="#modal9"><img src="2019_9.jpg" alt="写真9"></a>
-        <a href="#modal10"><img src="2019_10.jpg" alt="写真10"></a>
+        <a href="#modal1"><img src="2024_1.jpg" alt="写真1"></a>
+        <a href="#modal2"><img src="2024_2.jpg" alt="写真2"></a>
+        <a href="#modal3"><img src="2024_3.jpg" alt="写真3"></a>
+        <a href="#modal4"><img src="2024_4.jpg" alt="写真4"></a>
+        <a href="#modal5"><img src="2024_5.jpg" alt="写真5"></a>
+        <a href="#modal6"><img src="2024_6.jpg" alt="写真6"></a>
+        <a href="#modal7"><img src="2024_7.jpg" alt="写真7"></a>
+        <a href="#modal8"><img src="2024_8.jpg" alt="写真8"></a>
+        <a href="#modal9"><img src="2024_9.jpg" alt="写真9"></a>
+        <a href="#modal10"><img src="2024_10.jpg" alt="写真10"></a>
     </div>
     <div id="modal1" class="modal">
         <a href="#" class="modal-close">×</a>
-        <img src="2019_1.jpg" alt="写真1">
+        <img src="2024_1.jpg" alt="写真1">
         <div class="modal-caption" contenteditable="true">ドッグランでの1枚</div>
     </div>
 
     <div id="modal2" class="modal">
         <a href="#" class="modal-close">×</a>
-        <img src="2019_2.jpg" alt="写真2">
+        <img src="2024_2.jpg" alt="写真2">
         <div class="modal-caption" contenteditable="true">写真2のキャプション</div>
     </div>
 
     <div id="modal3" class="modal">
         <a href="#" class="modal-close">×</a>
-        <img src="2019_3.jpg" alt="写真3">
+        <img src="2024_3.jpg" alt="写真3">
         <div class="modal-caption" contenteditable="true">写真3のキャプション</div>
     </div>
 
     <div id="modal4" class="modal">
         <a href="#" class="modal-close">×</a>
-        <img src="2019_4.jpg" alt="写真4">
+        <img src="2024_4.jpg" alt="写真4">
         <div class="modal-caption" contenteditable="true">写真4のキャプション</div>
     </div>
 
     <div id="modal5" class="modal">
         <a href="#" class="modal-close">×</a>
-        <img src="2019_5.jpg" alt="写真5">
+        <img src="2024_5.jpg" alt="写真5">
         <div class="modal-caption" contenteditable="true">写真5のキャプション</div>
     </div>
 
     <div id="modal6" class="modal">
         <a href="#" class="modal-close">×</a>
-        <img src="2019_6.jpg" alt="写真6">
+        <img src="2024_6.jpg" alt="写真6">
         <div class="modal-caption" contenteditable="true">写真6のキャプション</div>
     </div>
 
     <div id="modal7" class="modal">
         <a href="#" class="modal-close">×</a>
-        <img src="2019_7.jpg" alt="写真7">
+        <img src="2024_7.jpg" alt="写真7">
         <div class="modal-caption" contenteditable="true">写真7のキャプション</div>
     </div>
 
     <div id="modal8" class="modal">
         <a href="#" class="modal-close">×</a>
-        <img src="2019_8.jpg" alt="写真8">
+        <img src="2024_8.jpg" alt="写真8">
         <div class="modal-caption" contenteditable="true">写真8のキャプション</div>
     </div>
 
     <div id="modal9" class="modal">
         <a href="#" class="modal-close">×</a>
-        <img src="2019_9.jpg" alt="写真9">
+        <img src="2024_9.jpg" alt="写真9">
         <div class="modal-caption" contenteditable="true">写真9のキャプション</div>
     </div>
 
     <div id="modal10" class="modal">
         <a href="#" class="modal-close">×</a>
-        <img src="2019_10.jpg" alt="写真10">
+        <img src="2024_10.jpg" alt="写真10">
         <div class="modal-caption" contenteditable="true">写真10のキャプション</div>
     </div>
 
     <script>
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') { // ESCキーが押された場合
+            if (event.key === 'Escape') {
                 const openModal = document.querySelector('.modal:target');
                 if (openModal) {
-                    window.location.hash = ''; // モーダルを閉じる（ハッシュをリセット）
+                    window.location.hash = '';
                 }
             }
         });
     </script>
 
-<title>ホームに戻るボタン</title>
-<style>
-    /* ボタンのスタイル */
-    .home-button {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        color: white;
-        background-color: #333;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        text-align: center;
-        cursor: pointer;
-        transition: color 0.3s ease, background-color 0.3s ease;
-    }
+    <title>ホームに戻るボタン</title>
+    <style>
+        .home-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
 
-    .home-button:hover {
-        color: #fffb00;
-        /* ホバー時に文字を光るように設定 */
-    }
-</style>
+        .home-button:hover {
+            color: #fffb00;
+        }
+    </style>
 </head>
 
 <body>
     <button onclick="window.location.href='index.html'" class="home-button">ホーム</button>
 
     <script>
-        // escキーが押されたときにホームに戻る処理
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
                 window.location.href = 'index.html';
             }
         });
     </script>
 </body>
+
 </html>
