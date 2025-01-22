@@ -72,57 +72,105 @@
                 /* 17枚分の幅を計算 (200px幅 + 10px間隔) */
             }
         }
-
     </style>
 </head>
 
 <body>
-    <title>ヘッダー表示</title>
+    <title>木目調ヘッダー</title>
     <style>
+        /* ページ全体の背景を木目調にする */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #d9a875, #c7986a, #d9a875);
+            /* 木目調の色合い */
+            background-size: 400px 400px;
+            background-blend-mode: multiply;
+            color: #fff;
+        }
+
         /* ヘッダーのスタイル */
         #header {
-          background-color: #333;
-          color: white;
-          padding: 20px;
-          text-align: center;
-          font-size: 2rem;
-          font-family: 'Arial', sans-serif;
-          overflow: hidden; /* 必要に応じて隠れる部分を制御 */
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            /* ヘッダーも木目調に */
+            background-size: 100% 100%;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            /* 文字に影をつける */
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+            /* 木製看板のようなフォント */
+            border: 5px solid #8b5a2b;
+            /* ヘッダーに木の枠風の境界線 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            /* 枠に立体感を出す影 */
         }
-    
-        /* 文字を非表示にするスタイル */
+
+        /* 初期状態の文字（非表示） */
         .hidden {
-          visibility: hidden;
+            opacity: 0;
         }
-      </style>
+
+        /* アニメーション */
+        .animated {
+            display: inline-block;
+            /* 各文字を独立してアニメーション可能にする */
+            animation: bounceIn 0.6s ease-out forwards;
+            /* アニメーション効果 */
+        }
+
+        /* 躍動感のあるアニメーション */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translateY(-20px);
+                /* 小さく上から出現 */
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2) translateY(10px);
+                /* 拡大して弾む */
+            }
+
+            100% {
+                transform: scale(1) translateY(0);
+                /* 元のサイズに戻る */
+            }
+        }
+    </style>
     </head>
+
     <body>
-      <header id="header"></header>
-    
-      <script>
-        // ヘッダーに表示するテキスト
-        const headerText = "イーストギャラリー";
-        const headerElement = document.getElementById('header');
-    
-        // 文字を1つずつ表示する関数
-        function animateText(text, element, delay = 100) {
-          element.textContent = ''; // ヘッダーを初期化
-          [...text].forEach((char, index) => {
-            const span = document.createElement('span');
-            span.textContent = char;
-            span.classList.add('hidden');
-            element.appendChild(span);
-    
-            // 指定時間ごとに文字を表示
-            setTimeout(() => {
-              span.classList.remove('hidden');
-            }, index * delay);
-          });
-        }
-    
-        // アニメーション実行
-        animateText(headerText, headerElement, 150);
-      </script>
+        <header id="header"></header>
+
+        <script>
+            // ヘッダーに表示するテキスト
+            const headerText = "イーストギャラリー";
+            const headerElement = document.getElementById('header');
+
+            // 文字を1つずつアニメーションさせる関数
+            function animateText(text, element, delay = 300) {
+                element.textContent = ''; // ヘッダーを初期化
+                [...text].forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.classList.add('hidden');
+                    element.appendChild(span);
+
+                    // 遅延を設定して文字にアニメーションを適用
+                    setTimeout(() => {
+                        span.classList.remove('hidden');
+                        span.classList.add('animated');
+                    }, index * delay);
+                });
+            }
+
+            // アニメーション実行
+            animateText(headerText, headerElement, 300); // 遅延を300msに設定
+        </script>
     </body>
 
     <div class="gallery-container">
@@ -149,160 +197,120 @@
 
     <title>クリック可能なメニューバー</title>
     <style>
+        /* ページ全体の背景を木目調にする */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #d9a875, #c7986a, #d9a875);
+            background-size: 400px 400px;
+            background-blend-mode: multiply;
+            color: #fff;
+        }
+
+        /* メニューバー全体のスタイル */
+        .menu-bar {
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            /* 木目調の背景 */
+            border: 5px solid #8b5a2b;
+            /* 木の枠風の境界線 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            /* 枠に立体感を追加 */
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+        }
+
         /* メニューのリストスタイル */
         .menu-bar ul {
             list-style: none;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-wrap: wrap;
-            /* 折り返しを有効化 */
-            gap: 100px;
-            /* 項目間の隙間 */
+            justify-content: center;
         }
-    
+
         /* メニュー項目スタイル */
         .menu-bar ul li {
             position: relative;
-            margin: 0;
+            margin: 0 15px;
         }
-    
-        /* ホームとギャラリーの間に特定のスペースを追加 */
-        .menu-bar ul li:first-child {
-            margin-right: 100px;
-            /* ホームとギャラリーの間にスペースを追加 */
-        }
-    
-        /* リンクスタイル */
+
+        /* メニューリンクのスタイル */
         .menu-bar ul li a {
             text-decoration: none;
             color: white;
             font-size: 16px;
             padding: 10px 15px;
             border-radius: 10px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            /* テキストの折り返しを無効化 */
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            /* 木目調背景 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: color 0.3s, transform 0.3s ease, box-shadow 0.3s;
         }
-    
+
         .menu-bar ul li a:hover {
             color: #ffcc00;
-            background-color: #555;
             transform: scale(1.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
         }
-    
-        /* ドロップダウンメニューのスタイル */
+
+        /* サブメニューのスタイル */
         .dropdown-menu {
             list-style: none;
             margin: 0;
             padding: 10px;
-            /* 内側の余白を調整 */
             position: absolute;
-            top: calc(100% + 10px);
-            /* 親メニューの下に配置 */
+            top: calc(100% + 5px);
             left: 0;
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            /* 木目調背景 */
             opacity: 0;
-            transform: scale(0.8);
-            /* 初期状態で小さく表示 */
+            transform: translateY(-10px) scale(0.95);
             visibility: hidden;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            /* 拡大アニメーションのみを適用 */
+            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             display: flex;
-            flex-wrap: wrap;
-            /* 項目が多い場合に折り返す */
-            gap: 10px;
-            /* サブメニューの間隔 */
-            width: 300px;
-            /* ドロップダウンメニューの幅を指定 */
-            max-height: 250px;
-            /* 高さの最大値を指定 */
-            overflow-y: auto;
-            /* 高さが超えた場合スクロールを有効化 */
+            /* サブメニューを横並び */
         }
-    
-        /* サブメニュー項目のスタイル */
+
         .dropdown-menu li {
-            padding: 10px 10px;
-            /* 項目の内側余白 */
-            width: calc(50% - 10px);
-            /* 横幅を調整して折り返し */
-            box-sizing: border-box;
-            /* パディングを含めて幅を計算 */
+            margin: 0 10px;
         }
-    
+
         .dropdown-menu li a {
             color: white;
             font-size: 14px;
             display: block;
-            transition: background-color 0.3s, padding-left 0.3s;
-            border-radius: 5px;
-            white-space: nowrap;
-            /* テキストの折り返しを無効化 */
-        }
-    
-        /* サブメニューが表示されるとき */
-        .dropdown-menu.active {
-            opacity: 1;
-            transform: scale(1);
-            /* ホバー時に元の大きさに戻す */
-            visibility: visible;
-        }
-    
-        /* ホバー時の派手なアニメーション */
-        .menu-bar ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
             padding: 10px 15px;
-            border-radius: 10px;
-            transition: all 0.5s ease;
-            /* アニメーション効果を追加 */
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            /* 子要素がはみ出さないようにする */
-        }
-    
-        .menu-bar ul li a:hover {
-            color: #ffcc00;
-            transform: scale(1.2);
-            /* 拡大のみ */
-            background: linear-gradient(135deg, #ff4b2b, #ffcc00);
-            /* 背景色を派手なグラデーションに */
-            box-shadow: 0 10px 20px rgba(255, 76, 41, 0.6);
-            /* 派手な影 */
-        }
-    
-        /* ホバー時の背景エフェクト */
-        .menu-bar ul li a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(120deg, rgba(255, 76, 41, 0.6), rgba(255, 204, 0, 0.8));
-            transform: skewX(-25deg);
-            z-index: -1;
-            /* 背景エフェクトを後ろに配置 */
-            transition: left 0.5s ease-in-out;
-        }
-    
-        .menu-bar ul li a:hover::before {
-            left: 0; /* 背景エフェクトがスライドして表示される */
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            /* 木目調背景 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        
-    </style>    
+        .dropdown-menu li a:hover {
+            background-color: #555;
+            transform: scale(1.1);
+        }
+
+        /* サブメニュー表示時のスタイル */
+        .dropdown-menu.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            visibility: visible;
+        }
+    </style>
+
     </head>
 
     <body>
         <nav class="menu-bar">
             <ul>
-                <li><a href="#home">ホーム</a></li>
                 <li class="dropdown">
                     <a href="#about" class="dropdown-toggle">ギャラリー</a>
                     <ul class="dropdown-menu">
@@ -323,25 +331,25 @@
             document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
                 toggle.addEventListener('click', event => {
                     event.preventDefault(); // デフォルトのリンク動作を無効化
-        
+
                     // 対応するサブメニューを取得
                     const dropdownMenu = toggle.nextElementSibling;
-        
+
                     // 他のサブメニューを閉じる
                     document.querySelectorAll('.dropdown-menu').forEach(menu => {
                         if (menu !== dropdownMenu) {
                             menu.classList.remove('active');
                         }
                     });
-        
+
                     // サブメニューの表示・非表示を切り替え
                     dropdownMenu.classList.toggle('active');
-        
+
                     // サブメニューが画面内に収まるように調整
                     adjustDropdownPosition(dropdownMenu);
                 });
             });
-        
+
             // メニュー外をクリックした場合にすべて閉じる
             document.addEventListener('click', event => {
                 if (!event.target.closest('.menu-bar')) {
@@ -350,29 +358,40 @@
                     });
                 }
             });
-        
-            // ドロップダウンメニューの位置を調整
+
+            // ドロップダウンメニューの位置と表示方向を調整
             function adjustDropdownPosition(menu) {
                 const rect = menu.getBoundingClientRect(); // 要素の位置とサイズを取得
                 const viewportWidth = window.innerWidth;  // 画面幅
                 const viewportHeight = window.innerHeight; // 画面高さ
-        
-                // 右側が画面幅を超えている場合
+
+                // メニューが画面の右側を超える場合
                 if (rect.right > viewportWidth) {
-                    menu.style.left = `-${rect.right - viewportWidth + 10}px`;
+                    menu.style.left = `${viewportWidth - rect.right - 10}px`; // 右端から調整
+                    menu.classList.add('wrap'); // 横並びを折り返しに変更
                 } else {
-                    menu.style.left = ""; // デフォルト値を適用
+                    menu.style.left = ""; // デフォルトの位置にリセット
+                    menu.classList.remove('wrap'); // 横並びに戻す
                 }
-        
-                // 下側が画面高さを超えている場合
+
+                // メニューが画面の下側を超える場合
                 if (rect.bottom > viewportHeight) {
                     menu.style.top = `-${rect.height + 10}px`; // 上に表示
                 } else {
                     menu.style.top = ""; // デフォルト値を適用
                 }
             }
+
+            // ドロップダウンメニューを開く際に調整を呼び出し
+            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                toggle.addEventListener('click', event => {
+                    const dropdownMenu = toggle.nextElementSibling;
+                    setTimeout(() => adjustDropdownPosition(dropdownMenu), 10); // アニメーション後に調整
+                });
+            });
+
         </script>
-        
+
     </body>
 
     <title>プロフィール</title>
@@ -453,14 +472,19 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #333;
-            color: #fff;
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            /* フッターも木目調に */
+            background-size: 100% 100%;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            /* 文字に影をつける */
             text-align: center;
             padding: 10px 0;
-            display: none;
-            /* 初期状態では非表示 */
+            border-top: 5px solid #8b5a2b;
+            /* 上部に木の枠風の境界線 */
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
+            /* フッターにも立体感を出す影 */
             z-index: 9999;
-            /* 他の要素より上に表示 */
         }
     </style>
     </head>
@@ -493,4 +517,5 @@
     </body>
 
 </body>
+
 </html>

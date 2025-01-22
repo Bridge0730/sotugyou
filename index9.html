@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2024</title>
+    <title>2020</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,12 +14,17 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background-color: #f4f4f9;
+            background-image: url('wood.jpg');
+            /* 木目調の背景画像 */
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
         }
 
         header {
             width: 100%;
-            background: #333;
+            background: rgba(139, 69, 19, 0.9);
+            /* 木目に合う濃い茶色 */
             padding: 20px 0;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -29,7 +34,8 @@
         header h1 {
             margin: 0;
             font-size: 24px;
-            color: #ffffff;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .gallery {
@@ -38,7 +44,8 @@
             gap: 10px;
             padding: 20px;
             max-width: 1000px;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.8);
+            /* 半透明の白 */
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -133,6 +140,7 @@
     <header>
         <h1>2024</h1>
     </header>
+
     <div class="gallery">
         <a href="#modal1"><img src="2024_1.jpg" alt="写真1"></a>
         <a href="#modal2"><img src="2024_2.jpg" alt="写真2"></a>
@@ -148,69 +156,60 @@
     <div id="modal1" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2024_1.jpg" alt="写真1">
-        <div class="modal-caption" contenteditable="true">ドッグランでの1枚</div>
+        <div class="modal-caption" contenteditable="true">1</div>
     </div>
-
     <div id="modal2" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2024_2.jpg" alt="写真2">
-        <div class="modal-caption" contenteditable="true">写真2のキャプション</div>
+        <div class="modal-caption" contenteditable="true">2</div>
     </div>
-
     <div id="modal3" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2024_3.jpg" alt="写真3">
-        <div class="modal-caption" contenteditable="true">写真3のキャプション</div>
+        <div class="modal-caption" contenteditable="true">3</div>
     </div>
-
     <div id="modal4" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2024_4.jpg" alt="写真4">
-        <div class="modal-caption" contenteditable="true">写真4のキャプション</div>
+        <div class="modal-caption" contenteditable="true">4</div>
     </div>
-
     <div id="modal5" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2024_5.jpg" alt="写真5">
-        <div class="modal-caption" contenteditable="true">写真5のキャプション</div>
+        <div class="modal-caption" contenteditable="true">5</div>
     </div>
-
     <div id="modal6" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2024_6.jpg" alt="写真6">
-        <div class="modal-caption" contenteditable="true">写真6のキャプション</div>
+        <div class="modal-caption" contenteditable="true">6</div>
     </div>
-
     <div id="modal7" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2024_7.jpg" alt="写真7">
-        <div class="modal-caption" contenteditable="true">写真7のキャプション</div>
+        <div class="modal-caption" contenteditable="true">7</div>
     </div>
-
     <div id="modal8" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2024_8.jpg" alt="写真8">
-        <div class="modal-caption" contenteditable="true">写真8のキャプション</div>
+        <div class="modal-caption" contenteditable="true">8</div>
     </div>
-
     <div id="modal9" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2024_9.jpg" alt="写真9">
-        <div class="modal-caption" contenteditable="true">写真9のキャプション</div>
+        <div class="modal-caption" contenteditable="true">9</div>
     </div>
-
     <div id="modal10" class="modal">
         <a href="#" class="modal-close">×</a>
         <img src="2024_10.jpg" alt="写真10">
-        <div class="modal-caption" contenteditable="true">写真10のキャプション</div>
+        <div class="modal-caption" contenteditable="true">10</div>
     </div>
 
     <script>
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
+            if (event.key === 'Escape') { // ESCキーが押された場合
                 const openModal = document.querySelector('.modal:target');
                 if (openModal) {
-                    window.location.hash = '';
+                    window.location.hash = ''; // モーダルを閉じる（ハッシュをリセット）
                 }
             }
         });
@@ -222,32 +221,36 @@
             display: inline-block;
             padding: 10px 20px;
             font-size: 16px;
-            color: white;
-            background-color: #333;
+            color: #fff;
+            background-color: #8B4513;
+            /* 木目に合わせた茶色 */
             border: none;
             border-radius: 5px;
             text-decoration: none;
             text-align: center;
             cursor: pointer;
             transition: color 0.3s ease, background-color 0.3s ease;
+            margin-top: 20px;
         }
 
         .home-button:hover {
-            color: #fffb00;
+            background-color: #A0522D;
+            /* 明るめの茶色 */
+            color: #FFFB00;
+            /* 明るい黄色 */
         }
     </style>
-</head>
-
-<body>
     <button onclick="window.location.href='index.html'" class="home-button">ホーム</button>
 
     <script>
+        // Tabキーが押されたときにホームに戻る処理
         document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape') {
+            if (event.key === 'Tab') {
                 window.location.href = 'index.html';
             }
         });
     </script>
+
 </body>
 
 </html>
