@@ -204,7 +204,7 @@
     });
 </script>
 
-<title>写真アップロードと保存</title>
+<title>写真アップロードと削除</title>
 <style>
     /* CSSは前のコードを流用 */
     .upload-container {
@@ -222,10 +222,14 @@
         gap: 10px;
         padding: 20px;
         max-width: 1000px;
-        background: rgba(255, 255, 255, 0.8);
+        /* background: rgba(255, 255, 255, 0.8); */
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         margin: auto;
+    }
+
+    .gallery-item {
+        position: relative;
     }
 
     .gallery img {
@@ -243,6 +247,23 @@
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
+    .delete-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 0, 0, 0.8);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .delete-btn:hover {
+        background: rgba(255, 0, 0, 1);
+    }
+
     .modal {
         display: none;
         position: fixed;
@@ -254,6 +275,8 @@
         justify-content: center;
         align-items: center;
         z-index: 1000;
+        flex-direction: column;
+        /* 画像と文字を縦に並べる */
     }
 
     .modal img {
@@ -267,8 +290,21 @@
         margin-top: 10px;
         font-size: 16px;
         padding: 5px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
+        border: none;
+        /* 枠線を消す */
+        background: transparent;
+        /* 背景も透明に */
+        outline: none;
+        /* フォーカス時の枠線も消す */
+        color: white;
+        /* テキストの色を設定 */
+        text-align: center;
+        /* 必要なら中央揃え */
+    }
+
+    .modal input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+        /* プレースホルダーの色を調整 */
     }
 
     .modal-close {
@@ -292,7 +328,7 @@
 
 <body>
     <div class="upload-container">
-        <h1>写真アップロードと保存</h1>
+        <h1>写真のアップロード</h1>
         <input type="file" id="fileInput" multiple accept="image/*">
     </div>
 
@@ -301,7 +337,7 @@
     <div class="modal" id="modal">
         <a href="#" class="modal-close" id="modalClose">×</a>
         <img id="modalImage" src="" alt="写真">
-        <input type="text" id="modalCaption" placeholder="名前を編集">
+        <input type="text" id="modalCaption" placeholder="名前の変更">
     </div>
 
     <script>
@@ -314,60 +350,84 @@
 
         let currentImageElement = null;
 
-        // ローカルストレージから画像データを読み込む
-        function loadImages() {
-            const savedImages = JSON.parse(localStorage.getItem("uploadedImages")) || [];
-            savedImages.forEach(({ src, alt }) => {
-                addImageToGallery(src, alt);
+        document.addEventListener("DOMContentLoaded", () => {
+            const gallery = document.querySelector(".gallery");
+            const uploadInput = document.querySelector('input[type="file"]');
+            const storedImages = JSON.parse(localStorage.getItem("uploadedImages")) || [];
+
+            // 初期化: ローカルストレージから画像をロード
+            storedImages.forEach(image => {
+                addImageToGallery(image);
             });
-        }
 
-        // 画像をギャラリーに追加
-        function addImageToGallery(src, alt) {
-            const imageWrapper = document.createElement("div");
-            const img = document.createElement("img");
-            img.src = src;
-            img.alt = alt || "アップロード画像";
-            img.addEventListener("click", () => openModal(img));
+            // ファイル選択イベント
+            uploadInput.addEventListener("change", (event) => {
+                const files = Array.from(event.target.files);
 
-            imageWrapper.appendChild(img);
-            gallery.appendChild(imageWrapper);
-        }
-
-        // ファイル選択時の処理
-        fileInput.addEventListener("change", (event) => {
-            const files = event.target.files;
-            const savedImages = JSON.parse(localStorage.getItem("uploadedImages")) || [];
-
-            Array.from(files).forEach((file) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const src = e.target.result;
-                    const alt = "新しい画像";
-
-                    // 画像をローカルストレージに保存
-                    savedImages.push({ src, alt });
-                    localStorage.setItem("uploadedImages", JSON.stringify(savedImages));
-
-                    // ギャラリーに追加
-                    addImageToGallery(src, alt);
-                };
-                reader.readAsDataURL(file);
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const imageData = e.target.result;
+                        storedImages.push(imageData); // 画像データを保存
+                        localStorage.setItem("uploadedImages", JSON.stringify(storedImages));
+                        addImageToGallery(imageData);
+                    };
+                    reader.readAsDataURL(file);
+                });
+                uploadInput.value = ""; // ファイル選択をリセット
             });
-        });
 
-        // モーダルを開く
-        function openModal(imageElement) {
-            currentImageElement = imageElement;
-            modalImage.src = imageElement.src;
-            modalCaption.value = imageElement.alt;
-            modal.style.display = "flex";
-        }
+            // ギャラリーに画像を追加
+            function addImageToGallery(imageData) {
+                const item = document.createElement("div");
+                item.classList.add("gallery-item");
 
-        // モーダルを閉じる
-        modalClose.addEventListener("click", (event) => {
-            event.preventDefault();
-            modal.style.display = "none";
+                const img = document.createElement("img");
+                img.src = imageData;
+                img.alt = "Uploaded image";
+                img.addEventListener("click", () => openModal(imageData));
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "削除";
+                deleteBtn.classList.add("delete-btn");
+                deleteBtn.addEventListener("click", () => {
+                    const index = storedImages.indexOf(imageData);
+                    if (index !== -1) {
+                        storedImages.splice(index, 1);
+                        localStorage.setItem("uploadedImages", JSON.stringify(storedImages));
+                        gallery.removeChild(item); // ギャラリーから削除
+                    }
+                });
+
+                item.appendChild(img);
+                item.appendChild(deleteBtn);
+                gallery.appendChild(item);
+            }
+
+            // モーダルを開く
+            function openModal(imageData) {
+                const modal = document.querySelector(".modal");
+                const modalImg = modal.querySelector("img");
+                const modalCaption = modal.querySelector(".modal-caption");
+
+                modalImg.src = imageData;
+                modalCaption.textContent = "名前の編集"; // デフォルトのキャプション
+                modal.style.display = "flex";
+
+                // ESCキーで閉じるイベント
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape") {
+                        modal.style.display = "none";
+                    }
+                });
+            }
+
+            // モーダルを閉じる
+            document.querySelector(".modal").addEventListener("click", (e) => {
+                if (e.target.tagName !== "IMG") {
+                    e.currentTarget.style.display = "none";
+                }
+            });
         });
 
         // 名前の編集
@@ -383,6 +443,18 @@
                 localStorage.setItem("uploadedImages", JSON.stringify(updatedImages));
             }
         });
+
+        // 画像を削除
+        function deleteImage(src, imageWrapper) {
+            const savedImages = JSON.parse(localStorage.getItem("uploadedImages")) || [];
+            const updatedImages = savedImages.filter((image) => image.src !== src);
+
+            // ローカルストレージを更新
+            localStorage.setItem("uploadedImages", JSON.stringify(updatedImages));
+
+            // ギャラリーから削除
+            gallery.removeChild(imageWrapper);
+        }
 
         // ページ読み込み時に画像をロード
         document.addEventListener("DOMContentLoaded", loadImages);
