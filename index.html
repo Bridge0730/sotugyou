@@ -210,11 +210,8 @@
         /* メニューバー全体のスタイル */
         .menu-bar {
             background: linear-gradient(90deg, #deb887, #cd853f);
-            /* 木目調の背景 */
             border: 5px solid #8b5a2b;
-            /* 木の枠風の境界線 */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            /* 枠に立体感を追加 */
             padding: 15px;
             border-radius: 10px;
             margin: 20px auto;
@@ -245,7 +242,6 @@
             padding: 10px 15px;
             border-radius: 10px;
             background: linear-gradient(90deg, #deb887, #cd853f);
-            /* 木目調背景 */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: color 0.3s, transform 0.3s ease, box-shadow 0.3s;
         }
@@ -265,7 +261,6 @@
             top: calc(100% + 5px);
             left: 0;
             background: linear-gradient(90deg, #deb887, #cd853f);
-            /* 木目調背景 */
             opacity: 0;
             transform: translateY(-10px) scale(0.95);
             visibility: hidden;
@@ -274,11 +269,14 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             display: flex;
-            /* サブメニューを横並び */
+            flex-wrap: wrap;
+            /* 自動で折り返す */
+            max-width: 300px;
+            /* 必要に応じて調整 */
         }
 
         .dropdown-menu li {
-            margin: 0 10px;
+            margin: 5px;
         }
 
         .dropdown-menu li a {
@@ -287,7 +285,6 @@
             display: block;
             padding: 10px 15px;
             background: linear-gradient(90deg, #deb887, #cd853f);
-            /* 木目調背景 */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             transition: background-color 0.3s, transform 0.3s;
@@ -306,6 +303,7 @@
         }
     </style>
 
+
     </head>
 
     <body>
@@ -322,35 +320,30 @@
                         <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index7.html">2022</a></li>
                         <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index8.html">2023</a></li>
                         <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index9.html">2024</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index9.html">2025</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
         <script>
-            // ドロップダウンメニューのクリックイベントを設定
             document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
                 toggle.addEventListener('click', event => {
-                    event.preventDefault(); // デフォルトのリンク動作を無効化
-
-                    // 対応するサブメニューを取得
+                    event.preventDefault();
                     const dropdownMenu = toggle.nextElementSibling;
 
-                    // 他のサブメニューを閉じる
+                    // 他のメニューを閉じる
                     document.querySelectorAll('.dropdown-menu').forEach(menu => {
                         if (menu !== dropdownMenu) {
                             menu.classList.remove('active');
                         }
                     });
 
-                    // サブメニューの表示・非表示を切り替え
+                    // 現在のメニューを開閉
                     dropdownMenu.classList.toggle('active');
-
-                    // サブメニューが画面内に収まるように調整
                     adjustDropdownPosition(dropdownMenu);
                 });
             });
 
-            // メニュー外をクリックした場合にすべて閉じる
             document.addEventListener('click', event => {
                 if (!event.target.closest('.menu-bar')) {
                     document.querySelectorAll('.dropdown-menu').forEach(menu => {
@@ -359,37 +352,23 @@
                 }
             });
 
-            // ドロップダウンメニューの位置と表示方向を調整
             function adjustDropdownPosition(menu) {
-                const rect = menu.getBoundingClientRect(); // 要素の位置とサイズを取得
-                const viewportWidth = window.innerWidth;  // 画面幅
-                const viewportHeight = window.innerHeight; // 画面高さ
+                const rect = menu.getBoundingClientRect();
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
 
-                // メニューが画面の右側を超える場合
                 if (rect.right > viewportWidth) {
-                    menu.style.left = `${viewportWidth - rect.right - 10}px`; // 右端から調整
-                    menu.classList.add('wrap'); // 横並びを折り返しに変更
+                    menu.style.left = `${viewportWidth - rect.right - 10}px`;
                 } else {
-                    menu.style.left = ""; // デフォルトの位置にリセット
-                    menu.classList.remove('wrap'); // 横並びに戻す
+                    menu.style.left = "";
                 }
 
-                // メニューが画面の下側を超える場合
                 if (rect.bottom > viewportHeight) {
-                    menu.style.top = `-${rect.height + 10}px`; // 上に表示
+                    menu.style.top = `-${rect.height + 10}px`;
                 } else {
-                    menu.style.top = ""; // デフォルト値を適用
+                    menu.style.top = "";
                 }
             }
-
-            // ドロップダウンメニューを開く際に調整を呼び出し
-            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-                toggle.addEventListener('click', event => {
-                    const dropdownMenu = toggle.nextElementSibling;
-                    setTimeout(() => adjustDropdownPosition(dropdownMenu), 10); // アニメーション後に調整
-                });
-            });
-
         </script>
 
     </body>
@@ -405,6 +384,7 @@
 
         .profile-container {
             width: 80%;
+            max-width: 600px;
             margin: 50px auto;
             padding: 20px;
             background-color: #fff;
@@ -421,16 +401,20 @@
             border-radius: 50%;
             width: 150px;
             height: 150px;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .profile-header h1 {
             font-size: 2rem;
-            margin-top: 10px;
+            margin-top: 15px;
+            color: #333;
         }
 
         .profile-header p {
             font-size: 1.2rem;
             color: #555;
+            margin: 5px 0;
         }
 
         .profile-info {
@@ -445,6 +429,7 @@
 
         .profile-info p {
             margin: 5px 0;
+            line-height: 1.5;
         }
     </style>
     </head>
@@ -452,17 +437,18 @@
     <body>
         <div class="profile-container">
             <div class="profile-header">
-                <img src="profile.jpeg" alt="プロフィール写真">
+                <img src="profile.jpeg" alt="イーストのプロフィール写真">
                 <h1>イースト</h1>
-                <p>トイ・プードル</p>
+                <p>犬種: トイ・プードル</p>
             </div>
             <div class="profile-info">
                 <h2>生年月日</h2>
                 <p>2014年8月30日</p>
-                <p>人形を振り回して遊ぶのが好きです</p>
+                <p>人形を振り回して遊ぶのが好きです。</p>
             </div>
         </div>
     </body>
+
 
     <title>フッター表示</title>
     <style>
