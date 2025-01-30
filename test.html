@@ -1,172 +1,510 @@
-<title>クリック可能なメニューバー</title>
-<style>
-    /* ページ全体の背景を木目調にする */
-    body {
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        background: linear-gradient(90deg, #d9a875, #c7986a, #d9a875);
-        background-size: 400px 400px;
-        background-blend-mode: multiply;
-        color: #fff;
-    }
+<!DOCTYPE html>
+<html lang="ja">
 
-    /* メニューバー全体のスタイル */
-    .menu-bar {
-        background: linear-gradient(90deg, #deb887, #cd853f);
-        border: 5px solid #8b5a2b;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        padding: 15px;
-        border-radius: 10px;
-        margin: 20px auto;
-        width: 80%;
-        text-align: center;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-    /* メニューのリストスタイル */
-    .menu-bar ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-    }
+    <title>ばけもの</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
 
-    /* メニュー項目スタイル */
-    .menu-bar ul li {
-        position: relative;
-        margin: 0 15px;
-    }
+        header {
+            width: 100%;
+            padding: 1em;
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            font-size: 2em;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
 
-    /* メニューリンクのスタイル */
-    .menu-bar ul li a {
-        text-decoration: none;
-        color: white;
-        font-size: 16px;
-        padding: 10px 15px;
-        border-radius: 10px;
-        background: linear-gradient(90deg, #deb887, #cd853f);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        transition: color 0.3s, transform 0.3s ease, box-shadow 0.3s;
-    }
+        /* ギャラリーコンテナ */
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin: 1em 0;
+        }
 
-    .menu-bar ul li a:hover {
-        color: #ffcc00;
-        transform: scale(1.1);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-    }
+        /* 横スクロールギャラリー */
+        .gallery {
+            display: flex;
+            width: calc(15 * (200px + 10px));
+            /* 画像幅200px + 余白10px × 15枚 */
+            animation: slide 20s linear infinite;
+            /* 横にスライドするアニメーション */
+        }
 
-    /* サブメニューのスタイル */
-    .dropdown-menu {
-        list-style: none;
-        margin: 0;
-        padding: 10px;
-        position: absolute;
-        top: calc(100% + 5px);
-        left: 0;
-        background: linear-gradient(90deg, #deb887, #cd853f);
-        opacity: 0;
-        transform: translateY(-10px) scale(0.95);
-        visibility: hidden;
-        transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        display: flex;
-        flex-wrap: wrap; /* 自動で折り返す */
-        max-width: 300px; /* 必要に応じて調整 */
-    }
+        .gallery img {
+            width: 400px;
+            /* すべての画像の幅を固定 */
+            height: 300px;
+            /* すべての画像の高さを固定 */
+            object-fit: cover;
+            /* アスペクト比を保ちながらトリミング */
+            border-radius: 8px;
+            border: 3px solid #fff;
+            /* 枠線 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-right: 10px;
+            /* 画像間の間隔 */
+        }
 
-    .dropdown-menu li {
-        margin: 5px;
-    }
-
-    .dropdown-menu li a {
-        color: white;
-        font-size: 14px;
-        display: block;
-        padding: 10px 15px;
-        background: linear-gradient(90deg, #deb887, #cd853f);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-        transition: background-color 0.3s, transform 0.3s;
-    }
-
-    .dropdown-menu li a:hover {
-        background-color: #555;
-        transform: scale(1.1);
-    }
-
-    /* サブメニュー表示時のスタイル */
-    .dropdown-menu.active {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        visibility: visible;
-    }
-</style>
-
-<body>
-    <nav class="menu-bar">
-        <ul>
-            <li class="dropdown">
-                <a href="#about" class="dropdown-toggle">ギャラリー</a>
-                <ul class="dropdown-menu">
-                    <li><a href="#2016">2016~2017</a></li>
-                    <li><a href="#2018">2018</a></li>
-                    <li><a href="#2019">2019</a></li>
-                    <li><a href="#2020">2020</a></li>
-                    <li><a href="#2021">2021</a></li>
-                    <li><a href="#2022">2022</a></li>
-                    <li><a href="#2023">2023</a></li>
-                    <li><a href="#2024">2024</a></li>
-                    <li><a href="#2025">2025</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-
-    <script>
-        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-            toggle.addEventListener('click', event => {
-                event.preventDefault();
-                const dropdownMenu = toggle.nextElementSibling;
-
-                // 他のメニューを閉じる
-                document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                    if (menu !== dropdownMenu) {
-                        menu.classList.remove('active');
-                    }
-                });
-
-                // 現在のメニューを開閉
-                dropdownMenu.classList.toggle('active');
-                adjustDropdownPosition(dropdownMenu);
-            });
-        });
-
-        document.addEventListener('click', event => {
-            if (!event.target.closest('.menu-bar')) {
-                document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                    menu.classList.remove('active');
-                });
-            }
-        });
-
-        function adjustDropdownPosition(menu) {
-            const rect = menu.getBoundingClientRect();
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-
-            if (rect.right > viewportWidth) {
-                menu.style.left = `${viewportWidth - rect.right - 10}px`;
-            } else {
-                menu.style.left = "";
+        /* 横スクロールアニメーション */
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
             }
 
-            if (rect.bottom > viewportHeight) {
-                menu.style.top = `-${rect.height + 10}px`;
-            } else {
-                menu.style.top = "";
+            100% {
+                transform: translateX(-3000px);
+                /* 17枚分の幅を計算 (200px幅 + 10px間隔) */
             }
         }
-    </script>
+    </style>
+</head>
+
+<body>
+    <title>木目調ヘッダー</title>
+    <style>
+        /* ページ全体の背景を木目調にする */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #d9a875, #c7986a, #d9a875);
+            /* 木目調の色合い */
+            background-size: 400px 400px;
+            background-blend-mode: multiply;
+            color: #fff;
+        }
+
+        /* ヘッダーのスタイル */
+        #header {
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            /* ヘッダーも木目調に */
+            background-size: 100% 100%;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            /* 文字に影をつける */
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+            /* 木製看板のようなフォント */
+            border: 5px solid #8b5a2b;
+            /* ヘッダーに木の枠風の境界線 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            /* 枠に立体感を出す影 */
+        }
+
+        /* 初期状態の文字（非表示） */
+        .hidden {
+            opacity: 0;
+        }
+
+        /* アニメーション */
+        .animated {
+            display: inline-block;
+            /* 各文字を独立してアニメーション可能にする */
+            animation: bounceIn 0.6s ease-out forwards;
+            /* アニメーション効果 */
+        }
+
+        /* 躍動感のあるアニメーション */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translateY(-20px);
+                /* 小さく上から出現 */
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2) translateY(10px);
+                /* 拡大して弾む */
+            }
+
+            100% {
+                transform: scale(1) translateY(0);
+                /* 元のサイズに戻る */
+            }
+        }
+    </style>
+    </head>
+
+    <body>
+        <header id="header"></header>
+
+        <script>
+            // ヘッダーに表示するテキスト
+            const headerText = "イーストギャラリー";
+            const headerElement = document.getElementById('header');
+
+            // 文字を1つずつアニメーションさせる関数
+            function animateText(text, element, delay = 300) {
+                element.textContent = ''; // ヘッダーを初期化
+                [...text].forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.classList.add('hidden');
+                    element.appendChild(span);
+
+                    // 遅延を設定して文字にアニメーションを適用
+                    setTimeout(() => {
+                        span.classList.remove('hidden');
+                        span.classList.add('animated');
+                    }, index * delay);
+                });
+            }
+
+            // アニメーション実行
+            animateText(headerText, headerElement, 300); // 遅延を300msに設定
+        </script>
+    </body>
+
+    <div class="gallery-container">
+        <div class="gallery" id="gallery-1">
+            <img src="1_1.png" alt="Photo 1">
+            <img src="1_1.png" alt="Photo 2">
+            <img src="1_1.png" alt="Photo 3">
+            <img src="1_1.png" alt="Photo 4">
+            <img src="1_1.png" alt="Photo 5">
+            <img src="1_1.png" alt="Photo 6">
+            <img src="1_1.png" alt="Photo 7">
+            <img src="1_1.png" alt="Photo 8">
+            <img src="1_1.png" alt="Photo 9">
+            <img src="1_1.png" alt="Photo 10">
+            <img src="1_1.png" alt="Photo 11">
+            <img src="1_1.png" alt="Photo 12">
+            <img src="1_1.png" alt="Photo 13">
+            <img src="1_1.png" alt="Photo 14">
+            <img src="1_1.png" alt="Photo 15">
+            <img src="1_1.png" alt="Photo 16">
+            <img src="1_1.png" alt="Photo 17">
+        </div>
+    </div>
+
+    <title>クリック可能なメニューバー</title>
+    <style>
+        /* ページ全体の背景を木目調にする */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #d9a875, #c7986a, #d9a875);
+            background-size: 400px 400px;
+            background-blend-mode: multiply;
+            color: #fff;
+        }
+
+        /* メニューバー全体のスタイル */
+        .menu-bar {
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            border: 5px solid #8b5a2b;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        /* メニューのリストスタイル */
+        .menu-bar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* メニュー項目スタイル */
+        .menu-bar ul li {
+            position: relative;
+            margin: 0 15px;
+        }
+
+        /* メニューリンクのスタイル */
+        .menu-bar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: color 0.3s, transform 0.3s ease, box-shadow 0.3s;
+        }
+
+        .menu-bar ul li a:hover {
+            color: #ffcc00;
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        /* サブメニューのスタイル */
+        .dropdown-menu {
+            list-style: none;
+            margin: 0;
+            padding: 10px;
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 0;
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            opacity: 0;
+            transform: translateY(-10px) scale(0.95);
+            visibility: hidden;
+            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            /* 自動で折り返す */
+            max-width: 300px;
+            /* 必要に応じて調整 */
+        }
+
+        .dropdown-menu li {
+            margin: 5px;
+        }
+
+        .dropdown-menu li a {
+            color: white;
+            font-size: 14px;
+            display: block;
+            padding: 10px 15px;
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #555;
+            transform: scale(1.1);
+        }
+
+        /* サブメニュー表示時のスタイル */
+        .dropdown-menu.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            visibility: visible;
+        }
+    </style>
+
+
+    </head>
+
+    <body>
+        <nav class="menu-bar">
+            <ul>
+                <li class="dropdown">
+                    <a href="#about" class="dropdown-toggle">ギャラリー</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index2.html">2016~2017</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index3.html">2018</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index4.html">2019</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index5.html">2020</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index6.html">2021</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index7.html">2022</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index8.html">2023</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index9.html">2024</a></li>
+                        <li><a href="C:\Users\kokuf\Documents\GitHub\sotugyou\index10.html">2025</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <script>
+            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                toggle.addEventListener('click', event => {
+                    event.preventDefault();
+                    const dropdownMenu = toggle.nextElementSibling;
+
+                    // 他のメニューを閉じる
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        if (menu !== dropdownMenu) {
+                            menu.classList.remove('active');
+                        }
+                    });
+
+                    // 現在のメニューを開閉
+                    dropdownMenu.classList.toggle('active');
+                    adjustDropdownPosition(dropdownMenu);
+                });
+            });
+
+            document.addEventListener('click', event => {
+                if (!event.target.closest('.menu-bar')) {
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                }
+            });
+
+            function adjustDropdownPosition(menu) {
+                const rect = menu.getBoundingClientRect();
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                if (rect.right > viewportWidth) {
+                    menu.style.left = `${viewportWidth - rect.right - 10}px`;
+                } else {
+                    menu.style.left = "";
+                }
+
+                if (rect.bottom > viewportHeight) {
+                    menu.style.top = `-${rect.height + 10}px`;
+                } else {
+                    menu.style.top = "";
+                }
+            }
+        </script>
+
+    </body>
+
+    <title>プロフィール</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-header img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-header h1 {
+            font-size: 2rem;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .profile-header p {
+            font-size: 1.2rem;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .profile-info {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .profile-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+    </style>
+    </head>
+
+    <body>
+        <div class="profile-container">
+            <div class="profile-header">
+                <img src="profile.jpeg" alt="イーストのプロフィール写真">
+                <h1>イースト</h1>
+                <p>犬種: トイ・プードル</p>
+            </div>
+            <div class="profile-info">
+                <h2>生年月日</h2>
+                <p>2014年8月30日</p>
+                <p>人形を振り回して遊ぶのが好きです。</p>
+            </div>
+        </div>
+    </body>
+
+
+    <title>フッター表示</title>
+    <style>
+        /* フッターのスタイル */
+        #customFooter {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #deb887, #cd853f);
+            /* フッターも木目調に */
+            background-size: 100% 100%;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            /* 文字に影をつける */
+            text-align: center;
+            padding: 10px 0;
+            border-top: 5px solid #8b5a2b;
+            /* 上部に木の枠風の境界線 */
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
+            /* フッターにも立体感を出す影 */
+            z-index: 9999;
+        }
+    </style>
+    </head>
+
+    <body>
+        <div style="height: 25vh; padding: 20px;">
+        </div>
+
+        <footer id="customFooter">
+            <p>&copy; 2024 卒業制作ギャラリー 𣘺立隆成</p>
+        </footer>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const footer = document.getElementById("customFooter");
+
+                window.addEventListener("scroll", () => {
+                    const scrollPosition = window.scrollY + window.innerHeight;
+                    const documentHeight = document.documentElement.scrollHeight;
+
+                    // ページ最下部に到達したらフッターを表示
+                    if (scrollPosition >= documentHeight) {
+                        footer.style.display = "block";
+                    } else {
+                        footer.style.display = "none";
+                    }
+                });
+            });
+        </script>
+    </body>
+
 </body>
+
+</html>

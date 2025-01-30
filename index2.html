@@ -425,12 +425,36 @@
                 });
             }
 
-            // モーダルを閉じる
             document.querySelector(".modal").addEventListener("click", (e) => {
-                if (e.target.tagName !== "IMG") {
+                // モーダル内のクリックが「キャプションの編集エリア」ではない場合のみ閉じる
+                if (e.target.tagName !== "IMG" && e.target !== modalCaption) {
                     e.currentTarget.style.display = "none";
                 }
             });
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const modal = document.querySelector(".modal");
+                const modalClose = document.getElementById("modalClose"); // ×ボタン
+                const modalImg = modal.querySelector("img");
+
+                // ESCキーで閉じる
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape") {
+                        closeModal();
+                    }
+                });
+
+                // ×ボタンで閉じる
+                modalClose.addEventListener("click", () => {
+                    closeModal();
+                });
+
+                // モーダルを閉じる処理
+                function closeModal() {
+                    modal.style.display = "none";
+                }
+            });
+
         });
 
         // 名前の編集
